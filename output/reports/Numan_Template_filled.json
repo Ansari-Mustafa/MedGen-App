@@ -1,127 +1,84 @@
 {
   "filled": {
-    "patient_name": "Christine O'Loughnan",
-    "patient_dob": "25/12/1966",
-    "patient_address_line1": "12 Mayfield Court",
-    "patient_address_city": "Ossett",
-    "patient_postcode": "WF5 0SG",
-    "patient_occupation": "Learning mentor in a primary school",
-    "other_id": "3051368",
-    "instructing_solicitor": "Minster Law Limited",
+    "appointment_date": "19th March 2026",
+    "appointment_length": null,
     "appointment_venue": "Mirfield Health Centre",
-    "incident_date": "9th December 2021",
-    "photo_id_type": "Driving licence",
-    "photo_id_confirmation": "Confirmed - Christine Jane O'Loughnan, DOB 25/12/1966",
-    "is_vehicle_occupant": "Yes - driver",
-    "incident_description": "Claimant was driving on the M62 motorway. Traffic had slowed due to a prior incident. As traffic began to flow more freely, an HGV struck the driver's side rear of the claimant's vehicle, causing the car to spin. The vehicle hit the central reservation, bounced off, and became embedded in the crash barrier on the nearside. The claimant, her husband (front passenger), and her adult daughter (rear passenger) were able to exit the vehicle. Police attended and the claimant was taken by a friend to Pinderfields Hospital A&E.",
+    "claimant_age": "50",
+    "diagnosis_and_prognosis": "The claimant sustained soft tissue injuries to the head and left lower leg as a result of the index accident. He also sustained three lacerations to the scalp which have now well-healed. The head pain resolved within approximately four days. The left lower leg pain, which was initially severe to moderate, has now reduced to mild and is weather-sensitive. All physical injuries have resolved or are resolving satisfactorily and no further physiotherapy or investigation is required. The claimant continues to experience psychological symptoms including nightmares, flashbacks, heightened startle response, and depression, for which a referral to a psychologist is recommended.",
+    "document_review_notes": null,
+    "effect_on_life": "As a consequence of the index accident, the claimant was unable to ride his electric bicycle for approximately two months and was required to use a taxi to travel to work for approximately two and a half months. He reports no significant impact upon leisure activities, holidays, or family plans. There were no changes to his living arrangements. The claimant reports that he was too frightened to cycle for a prolonged period and remains startled by car horns.",
+    "effect_on_work": "The claimant was absent from work for one week following the index accident. Upon his return, he was placed on lighter duties for approximately six weeks before resuming his normal role. He works twelve-hour shifts as a factory operative and reports that on occasions during the recovery period he was required to leave work after eight hours owing to pain in his leg and back.",
+    "examination_date": "19th March 2026",
+    "examination_findings": [
+      "Three well-healed lacerations were noted on the top of the scalp, reported to be secondary to the index accident.",
+      "No tenderness was identified on palpation of the left lower leg or knee.",
+      "Screening examination of the left hip was normal with no pain on movement.",
+      "The left knee was ligamentously stable.",
+      "Range of motion at the left hip, knee, and ankle was normal.",
+      "No areas of bony tenderness were identified in the left lower limb.",
+      "No current head pain was reported at the time of examination; pins and needles sensation on the scalp was noted but attributed to a pre-existing condition."
+    ],
+    "immediate_medical_attendance": "The claimant was attended to at the scene by both the police and ambulance services. He was transported by ambulance to Pinderfields Hospital Accident and Emergency department, where he underwent an X-ray and was examined. He was advised to rest and take paracetamol. He was discharged after approximately seven to eight hours.",
+    "incident_date": "26th February 2025",
+    "incident_description": "The claimant was riding his electric bicycle on Huddersfield Road at approximately 05:40 to 05:50 hours in the morning, returning home following a night shift. A motor vehicle emerged from a side road into the main road without giving way. The claimant, who had the right of way, was unable to avoid the vehicle and collided with it in a T-bone fashion. Upon impact, the claimant struck the windscreen of the vehicle with his head, rolled over the vehicle approximately twice, and fell to the ground on the other side of the car. The driver of the vehicle stopped and called the emergency services.",
+    "instructing_agency": null,
+    "instructing_solicitor": "Somerset Bridge Limited",
+    "is_soft_tissue_case": "Yes",
+    "is_vehicle_occupant": "No",
+    "living_arrangements": "No change to living arrangements following the accident.",
+    "medical_history": "The claimant has a history of a previous cerebrovascular accident (stroke), hypertension, and chronic kidney disease. He reports taking regular medication. He also reports pre-existing pins and needles sensation on the top of his head, which predates the index accident.",
+    "other_id": "3133058",
+    "past_accidents": "No previous accidents were reported.",
+    "patient_address_city": "Dewsbury",
+    "patient_address_line1": "2 Sackville Street, Ravensthorpe",
+    "patient_dob": "2nd April 1975",
+    "patient_name": "Sandor Rekettyes",
+    "patient_occupation": "Factory operative",
+    "patient_postcode": "WF13 3BX",
+    "photo_id_confirmation": "Confirmed",
+    "photo_id_type": "Bank card",
+    "physical_symptoms": [
+      "Head pain described as mild to moderate on the day of the accident, which resolved within approximately four days.",
+      "Three lacerations to the scalp sustained in the accident, now well-healed.",
+      "Left lower leg pain described as severe to moderate on the day of the accident, now reported as mild.",
+      "Extensive bruising to the back and legs noted the day following the accident.",
+      "Generalised body aching the day following the accident.",
+      "Weather-sensitive aching in the left knee, which the claimant reports was not present prior to the accident."
+    ],
+    "pre_existing_conditions": "The claimant has a history of a previous stroke, hypertension, and chronic kidney disease. He also reports a pre-existing pins and needles sensation on the top of his head, which predates the index accident.",
+    "psychological_symptoms": "The claimant reports experiencing nightmares following the accident, in which he relives the collision and wakes to the sensation of the impact. These nightmares persist to the present day. He was too frightened to ride his bicycle for approximately two months following the accident and remains startled by car horns. He also reports symptoms of depression, which he states are worsening, compounded by the subsequent death of his wife. A referral to a psychologist is recommended.",
+    "rehabilitative_treatment": "The claimant attended approximately four sessions of physiotherapy at a facility in Huddersfield, commencing in August 2025, which was arranged by the insurance company. The sessions focused on exercises for his left leg. The claimant discontinued physiotherapy owing to his wife's diagnosis of cancer, which required him to act as her full-time carer. A referral to a psychologist has been recommended for the claimant's ongoing psychological symptoms.",
+    "report_date": "19th March 2026",
+    "seatbelt_exemption": null,
     "seatbelt_worn": null,
     "vehicle_has_seatbelts": null,
-    "seatbelt_exemption": null,
-    "immediate_medical_attendance": "Attended Pinderfields Hospital A&E on the day of the incident. Had a chest x-ray and was seen by an A&E consultant. Blood pressure was elevated. Discharged with advice to take anti-inflammatories. Possible x-ray of left wrist also performed.",
-    "subsequent_medical_attendance": "Returned to A&E the next day or day after with neck, wrist, chest and elbow pain. Further x-rays and CT scan performed. Suspected scaphoid fracture - wrist brace applied. Attended fracture/scaphoid clinic; no fracture confirmed. Multiple rib fractures identified incidentally on a PET scan performed for another reason. GP monitored throughout; prescribed naproxen then anti-inflammatories and analgesia as needed. Referred to talking therapies (CBT and EMDR) via GP for anxiety and PTSD. Psychological report completed by psychologist. Private physiotherapy (approximately 6-8 sessions) and NHS physiotherapy (ongoing for approximately 18 months) focusing on wrist, elbow, and neck mobility.",
-    "rehabilitative_treatment": "Private physiotherapy (approximately 6-8 sessions) and NHS physiotherapy (ongoing for approximately 18 months) for wrist, elbow, and neck. CBT (cognitive behavioural therapy) and EMDR (eye movement desensitisation and reprocessing) for anxiety and PTSD. GP monitoring with naproxen and anti-inflammatories/analgesia as needed.",
-    "physical_symptom": "Neck pain (whiplash-type injury) - onset day of incident, initially moderate, currently normal to mild with occasional symptoms on rotation and lateral flexion. Clicking noted on examination.",
-    "physical_symptom_2": "Left wrist pain with swelling - onset day of incident, initially moderate to severe (suspected scaphoid fracture, brace applied; fracture not confirmed on follow-up). Currently mild with persistent dorsal swelling. Full range of movement on examination.",
-    "physical_symptom_3": "Left elbow pain - onset day of or day after incident, initially moderate, currently normal to mild with occasional niggles on activity. Full range of movement on examination with clicking noted.",
-    "physical_symptom_4": "Left-sided multiple rib fractures with chest pain - onset day of incident, initially severe, resolved to normal over approximately 3 months. Chest clear on examination.",
-    "psychological_symptoms": "Anxiety and PTSD diagnosed by psychologist. Symptoms included heightened anxiety around driving and as a passenger, hypervigilance (e.g. anxiety when hearing cars while walking), flashbacks, nightmares, and avoidance behaviours (e.g. unable to fill car with fuel due to smell). Treated with CBT and EMDR via GP referral to talking therapies.",
-    "effect_on_work": "Claimant was off work for approximately 6 months following the incident. Employer was not supportive and pressured her to return. Claimant resigned at approximately 6 months. Also affected by incidental finding of masses in lungs and stomach (benign thymic mass requiring surgical removal, resulting in partial vocal palsy), which compounded work-related stress.",
-    "effect_on_life": "Slept in spare bedroom for approximately 6 months (husband also injured, and due to flashbacks/nightmares and disturbed sleep). Difficulty with activities requiring gripping (e.g. spin class cycling). Reduced use of left wrist during exercise. Significant psychological impact affecting daily activities and driving.",
-    "living_arrangements": "Slept in spare bedroom for approximately 6 months post-incident due to both she and her husband sustaining injuries, and due to flashbacks and nightmares.",
-    "medical_history": "Hypertension (pre-existing, on medication). Incidental finding of masses in lungs and stomach on PET scan; one mass removed surgically (benign, near thymus gland), resulting in partial vocal palsy.",
-    "is_soft_tissue_case": "Predominantly yes, with additional bony injury (multiple left-sided rib fractures).",
-    "examination_neck": "Flexion (chin to chest) - full, pain-free. Extension and rotation - full range, no pain, clicking noted on rotation. Lateral flexion (ear to shoulder) - full, no pain, clicking noted.",
-    "examination_back": null,
-    "examination_bilateral_flanks": null,
-    "examination_hips": null,
-    "diagnosis_and_prognosis": "1. Soft tissue neck injury (whiplash-type): resolved to normal/mild; may retain approximately 10% residual symptoms. 2. Left wrist soft tissue injury with persistent dorsal swelling (suspected scaphoid fracture not confirmed): currently mild; may retain some residual chronic pain. 3. Left elbow soft tissue injury: currently normal to mild; expected to settle. 4. Multiple left-sided rib fractures with associated soft tissue injury: resolved to normal at approximately 3 months. 5. Anxiety and PTSD: diagnosed by psychologist, treated with CBT and EMDR. Prognosis: majority of physical injuries settling; possible residual chronic pain in neck and wrist at approximately 10% of normal function (90% recovery anticipated).",
-    "none_reported": null,
-    "document_review_notes": "Premex ID: 3051368. Solicitor reference: FTMOJ33758A. Medical records reviewed included A&E attendances at Pinderfields Hospital, GP records, physiotherapy records, and psychologist report. PET scan records and fracture clinic records referenced."
+    "signature_date": "19th March 2026",
+    "subsequent_medical_attendance": "The claimant did not attend his general practitioner following discharge from hospital. He self-managed his symptoms with over-the-counter analgesics. He commenced physiotherapy in approximately August 2025, arranged by the insurance company, attending approximately four sessions before discontinuing due to his wife's illness."
   },
   "unfilled": [
     {
-      "placeholder": "appointment_date",
-      "reason": "The transcript does not explicitly state the date of the appointment/examination."
-    },
-    {
       "placeholder": "appointment_length",
-      "reason": "The duration of the appointment is not mentioned in the transcript."
+      "reason": "The transcript references start and finish times being recorded but the actual duration or end time is not clearly stated in the transcript."
     },
     {
-      "placeholder": "claimant_age",
-      "reason": "Age at time of appointment is not explicitly stated; only DOB (25/12/1966) is provided."
-    },
-    {
-      "placeholder": "examination_date",
-      "reason": "The date of examination is not explicitly stated in the transcript."
-    },
-    {
-      "placeholder": "expert_credentials",
-      "reason": "The examining doctor's credentials/qualifications are not mentioned in the transcript."
-    },
-    {
-      "placeholder": "expert_name",
-      "reason": "The examining doctor's name is not stated in the transcript."
-    },
-    {
-      "placeholder": "expert_qual_1_description",
-      "reason": "No information about the expert's qualifications is provided in the transcript."
-    },
-    {
-      "placeholder": "expert_qual_1_year",
-      "reason": "No information about the expert's qualifications is provided in the transcript."
-    },
-    {
-      "placeholder": "expert_qual_2_description",
-      "reason": "No information about the expert's qualifications is provided in the transcript."
-    },
-    {
-      "placeholder": "expert_qual_2_year",
-      "reason": "No information about the expert's qualifications is provided in the transcript."
-    },
-    {
-      "placeholder": "expert_qual_3_description",
-      "reason": "No information about the expert's qualifications is provided in the transcript."
-    },
-    {
-      "placeholder": "expert_qual_3_year",
-      "reason": "No information about the expert's qualifications is provided in the transcript."
-    },
-    {
-      "placeholder": "expert_qual_4_description",
-      "reason": "No information about the expert's qualifications is provided in the transcript."
-    },
-    {
-      "placeholder": "expert_qual_4_year",
-      "reason": "No information about the expert's qualifications is provided in the transcript."
-    },
-    {
-      "placeholder": "gmc_number",
-      "reason": "The doctor's GMC number is not mentioned in the transcript."
+      "placeholder": "document_review_notes",
+      "reason": "No documents were reviewed or discussed during the consultation beyond the solicitor's referral details."
     },
     {
       "placeholder": "instructing_agency",
-      "reason": "The instructing agency (e.g. Premex) is referenced by ID only; the agency name is not explicitly confirmed in the transcript beyond the Premex ID number."
-    },
-    {
-      "placeholder": "report_date",
-      "reason": "The date the report was produced is not stated in the transcript."
-    },
-    {
-      "placeholder": "signature_date",
-      "reason": "The signature date for the report is not mentioned in the transcript."
+      "reason": "No instructing agency distinct from the instructing solicitor was mentioned in the transcript."
     },
     {
       "placeholder": "seatbelt_worn",
-      "reason": "Whether the claimant was wearing a seatbelt is not discussed in the transcript."
-    },
-    {
-      "placeholder": "vehicle_has_seatbelts",
-      "reason": "Whether the vehicle had seatbelts is not discussed in the transcript."
+      "reason": "The claimant was riding an electric bicycle, not a motor vehicle; seatbelt use is not applicable."
     },
     {
       "placeholder": "seatbelt_exemption",
-      "reason": "No discussion of seatbelt exemption in the transcript."
+      "reason": "The claimant was riding an electric bicycle; seatbelt exemption is not applicable."
+    },
+    {
+      "placeholder": "vehicle_has_seatbelts",
+      "reason": "The claimant was riding an electric bicycle, which does not have seatbelts; not applicable."
     }
   ]
 }

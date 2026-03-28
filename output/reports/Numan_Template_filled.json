@@ -1,0 +1,127 @@
+{
+  "filled": {
+    "patient_name": "Christine O'Loughnan",
+    "patient_dob": "25/12/1966",
+    "patient_address_line1": "12 Mayfield Court",
+    "patient_address_city": "Ossett",
+    "patient_postcode": "WF5 0SG",
+    "patient_occupation": "Learning mentor in a primary school",
+    "other_id": "3051368",
+    "instructing_solicitor": "Minster Law Limited",
+    "appointment_venue": "Mirfield Health Centre",
+    "incident_date": "9th December 2021",
+    "photo_id_type": "Driving licence",
+    "photo_id_confirmation": "Confirmed - Christine Jane O'Loughnan, DOB 25/12/1966",
+    "is_vehicle_occupant": "Yes - driver",
+    "incident_description": "Claimant was driving on the M62 motorway. Traffic had slowed due to a prior incident. As traffic began to flow more freely, an HGV struck the driver's side rear of the claimant's vehicle, causing the car to spin. The vehicle hit the central reservation, bounced off, and became embedded in the crash barrier on the nearside. The claimant, her husband (front passenger), and her adult daughter (rear passenger) were able to exit the vehicle. Police attended and the claimant was taken by a friend to Pinderfields Hospital A&E.",
+    "seatbelt_worn": null,
+    "vehicle_has_seatbelts": null,
+    "seatbelt_exemption": null,
+    "immediate_medical_attendance": "Attended Pinderfields Hospital A&E on the day of the incident. Had a chest x-ray and was seen by an A&E consultant. Blood pressure was elevated. Discharged with advice to take anti-inflammatories. Possible x-ray of left wrist also performed.",
+    "subsequent_medical_attendance": "Returned to A&E the next day or day after with neck, wrist, chest and elbow pain. Further x-rays and CT scan performed. Suspected scaphoid fracture - wrist brace applied. Attended fracture/scaphoid clinic; no fracture confirmed. Multiple rib fractures identified incidentally on a PET scan performed for another reason. GP monitored throughout; prescribed naproxen then anti-inflammatories and analgesia as needed. Referred to talking therapies (CBT and EMDR) via GP for anxiety and PTSD. Psychological report completed by psychologist. Private physiotherapy (approximately 6-8 sessions) and NHS physiotherapy (ongoing for approximately 18 months) focusing on wrist, elbow, and neck mobility.",
+    "rehabilitative_treatment": "Private physiotherapy (approximately 6-8 sessions) and NHS physiotherapy (ongoing for approximately 18 months) for wrist, elbow, and neck. CBT (cognitive behavioural therapy) and EMDR (eye movement desensitisation and reprocessing) for anxiety and PTSD. GP monitoring with naproxen and anti-inflammatories/analgesia as needed.",
+    "physical_symptom": "Neck pain (whiplash-type injury) - onset day of incident, initially moderate, currently normal to mild with occasional symptoms on rotation and lateral flexion. Clicking noted on examination.",
+    "physical_symptom_2": "Left wrist pain with swelling - onset day of incident, initially moderate to severe (suspected scaphoid fracture, brace applied; fracture not confirmed on follow-up). Currently mild with persistent dorsal swelling. Full range of movement on examination.",
+    "physical_symptom_3": "Left elbow pain - onset day of or day after incident, initially moderate, currently normal to mild with occasional niggles on activity. Full range of movement on examination with clicking noted.",
+    "physical_symptom_4": "Left-sided multiple rib fractures with chest pain - onset day of incident, initially severe, resolved to normal over approximately 3 months. Chest clear on examination.",
+    "psychological_symptoms": "Anxiety and PTSD diagnosed by psychologist. Symptoms included heightened anxiety around driving and as a passenger, hypervigilance (e.g. anxiety when hearing cars while walking), flashbacks, nightmares, and avoidance behaviours (e.g. unable to fill car with fuel due to smell). Treated with CBT and EMDR via GP referral to talking therapies.",
+    "effect_on_work": "Claimant was off work for approximately 6 months following the incident. Employer was not supportive and pressured her to return. Claimant resigned at approximately 6 months. Also affected by incidental finding of masses in lungs and stomach (benign thymic mass requiring surgical removal, resulting in partial vocal palsy), which compounded work-related stress.",
+    "effect_on_life": "Slept in spare bedroom for approximately 6 months (husband also injured, and due to flashbacks/nightmares and disturbed sleep). Difficulty with activities requiring gripping (e.g. spin class cycling). Reduced use of left wrist during exercise. Significant psychological impact affecting daily activities and driving.",
+    "living_arrangements": "Slept in spare bedroom for approximately 6 months post-incident due to both she and her husband sustaining injuries, and due to flashbacks and nightmares.",
+    "medical_history": "Hypertension (pre-existing, on medication). Incidental finding of masses in lungs and stomach on PET scan; one mass removed surgically (benign, near thymus gland), resulting in partial vocal palsy.",
+    "is_soft_tissue_case": "Predominantly yes, with additional bony injury (multiple left-sided rib fractures).",
+    "examination_neck": "Flexion (chin to chest) - full, pain-free. Extension and rotation - full range, no pain, clicking noted on rotation. Lateral flexion (ear to shoulder) - full, no pain, clicking noted.",
+    "examination_back": null,
+    "examination_bilateral_flanks": null,
+    "examination_hips": null,
+    "diagnosis_and_prognosis": "1. Soft tissue neck injury (whiplash-type): resolved to normal/mild; may retain approximately 10% residual symptoms. 2. Left wrist soft tissue injury with persistent dorsal swelling (suspected scaphoid fracture not confirmed): currently mild; may retain some residual chronic pain. 3. Left elbow soft tissue injury: currently normal to mild; expected to settle. 4. Multiple left-sided rib fractures with associated soft tissue injury: resolved to normal at approximately 3 months. 5. Anxiety and PTSD: diagnosed by psychologist, treated with CBT and EMDR. Prognosis: majority of physical injuries settling; possible residual chronic pain in neck and wrist at approximately 10% of normal function (90% recovery anticipated).",
+    "none_reported": null,
+    "document_review_notes": "Premex ID: 3051368. Solicitor reference: FTMOJ33758A. Medical records reviewed included A&E attendances at Pinderfields Hospital, GP records, physiotherapy records, and psychologist report. PET scan records and fracture clinic records referenced."
+  },
+  "unfilled": [
+    {
+      "placeholder": "appointment_date",
+      "reason": "The transcript does not explicitly state the date of the appointment/examination."
+    },
+    {
+      "placeholder": "appointment_length",
+      "reason": "The duration of the appointment is not mentioned in the transcript."
+    },
+    {
+      "placeholder": "claimant_age",
+      "reason": "Age at time of appointment is not explicitly stated; only DOB (25/12/1966) is provided."
+    },
+    {
+      "placeholder": "examination_date",
+      "reason": "The date of examination is not explicitly stated in the transcript."
+    },
+    {
+      "placeholder": "expert_credentials",
+      "reason": "The examining doctor's credentials/qualifications are not mentioned in the transcript."
+    },
+    {
+      "placeholder": "expert_name",
+      "reason": "The examining doctor's name is not stated in the transcript."
+    },
+    {
+      "placeholder": "expert_qual_1_description",
+      "reason": "No information about the expert's qualifications is provided in the transcript."
+    },
+    {
+      "placeholder": "expert_qual_1_year",
+      "reason": "No information about the expert's qualifications is provided in the transcript."
+    },
+    {
+      "placeholder": "expert_qual_2_description",
+      "reason": "No information about the expert's qualifications is provided in the transcript."
+    },
+    {
+      "placeholder": "expert_qual_2_year",
+      "reason": "No information about the expert's qualifications is provided in the transcript."
+    },
+    {
+      "placeholder": "expert_qual_3_description",
+      "reason": "No information about the expert's qualifications is provided in the transcript."
+    },
+    {
+      "placeholder": "expert_qual_3_year",
+      "reason": "No information about the expert's qualifications is provided in the transcript."
+    },
+    {
+      "placeholder": "expert_qual_4_description",
+      "reason": "No information about the expert's qualifications is provided in the transcript."
+    },
+    {
+      "placeholder": "expert_qual_4_year",
+      "reason": "No information about the expert's qualifications is provided in the transcript."
+    },
+    {
+      "placeholder": "gmc_number",
+      "reason": "The doctor's GMC number is not mentioned in the transcript."
+    },
+    {
+      "placeholder": "instructing_agency",
+      "reason": "The instructing agency (e.g. Premex) is referenced by ID only; the agency name is not explicitly confirmed in the transcript beyond the Premex ID number."
+    },
+    {
+      "placeholder": "report_date",
+      "reason": "The date the report was produced is not stated in the transcript."
+    },
+    {
+      "placeholder": "signature_date",
+      "reason": "The signature date for the report is not mentioned in the transcript."
+    },
+    {
+      "placeholder": "seatbelt_worn",
+      "reason": "Whether the claimant was wearing a seatbelt is not discussed in the transcript."
+    },
+    {
+      "placeholder": "vehicle_has_seatbelts",
+      "reason": "Whether the vehicle had seatbelts is not discussed in the transcript."
+    },
+    {
+      "placeholder": "seatbelt_exemption",
+      "reason": "No discussion of seatbelt exemption in the transcript."
+    }
+  ]
+}

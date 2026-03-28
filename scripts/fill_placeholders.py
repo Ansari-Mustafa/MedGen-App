@@ -13,7 +13,7 @@ load_dotenv(PROJECT_ROOT / ".env")
 from extract_placeholders import extract_placeholders
 
 client = Anthropic()
-MODEL = "claude-sonnet-4-6"
+MODEL = "claude-opus-4-6"
 
 
 def _is_list_field(name: str) -> bool:
@@ -33,18 +33,24 @@ def build_prompt(placeholders: list[str], transcript: str) -> str:
             lines.append(f"- {p}  (return a string)")
     placeholder_list = "\n".join(lines)
 
-    return f"""You are a medical report assistant. You are given a transcript from a recording between a doctor and a claimant/patient, along with a list of placeholder field names from a report template.
+    return f"""You are an expert medical-legal report writer assisting a consulting doctor in the UK. You are given a transcript of a recorded consultation between a doctor and a claimant, along with the placeholder field names from a formal medical-legal report template.
 
-Your job:
+Your task is to populate every placeholder by carefully extracting and synthesising information from the transcript.
+
+LANGUAGE & STYLE RULES — follow these strictly:
+- Write in formal British English throughout (e.g. "colour" not "color", "organise" not "organize", "whilst" not "while", "licence" not "license").
+- Use precise, professional medical-legal language appropriate for a UK medicolegal report.
+- Write in the third person. Do NOT use the claimant's name anywhere in descriptive or narrative fields. Refer to them only as "the claimant" (e.g. "The claimant reports...", "The claimant attended..."). The only exception is identity fields such as patient_name, patient_dob, patient_address — those should contain the actual value from the transcript.
+- Do not use informal language, contractions, or colloquialisms.
+
+EXTRACTION RULES:
 1. Read the transcript carefully.
-2. For each placeholder, extract the correct value from the transcript.
+2. For each placeholder, extract or compose the correct value:
    - String fields: return a plain string value.
-   - LIST fields: return a JSON array of strings (one element per bullet point).
+   - LIST fields: return a JSON array of strings, one item per bullet point. Each item should be a complete, standalone sentence or phrase.
 3. If a placeholder cannot be filled from the transcript, set its value to null.
-
-IMPORTANT:
-- Use ONLY the bare field name (without []) as the JSON key.
-- LIST fields must always have an array value (or null if not found), never a string.
+4. Use ONLY the bare field name (without []) as the JSON key.
+5. LIST fields must always have an array value (or null if not found), never a string.
 
 Return ONLY valid JSON with this exact structure:
 {{
@@ -56,7 +62,7 @@ Return ONLY valid JSON with this exact structure:
   "unfilled": [
     {{
       "placeholder": "placeholder_name",
-      "reason": "brief explanation of why it couldn't be filled"
+      "reason": "brief explanation of why it could not be filled"
     }},
     ...
   ]
@@ -72,16 +78,33 @@ TRANSCRIPT:
 def fill_placeholders(placeholders: list[str], transcript: str) -> dict:
     response = client.messages.create(
         model=MODEL,
-        max_tokens=4096,
+        max_tokens=16000,
         messages=[{"role": "user", "content": build_prompt(placeholders, transcript)}],
     )
     text = response.content[0].text
 
     # Strip markdown fences if present
-    if text.startswith("```"):
-        text = text.split("\n", 1)[1].rsplit("```", 1)[0]
+    if "```" in text:
+        # Pull out content between the first ``` and last ```
+        text = text[text.index("```"):]
+        text = text.split("\n", 1)[1] if "\n" in text else text
+        text = text.rsplit("```", 1)[0]
 
-    return json.loads(text)
+    # Fallback: extract raw JSON by finding the outermost { ... }
+    text = text.strip()
+    if not text.startswith("{"):
+        start = text.find("{")
+        end = text.rfind("}") + 1
+        if start != -1 and end > start:
+            text = text[start:end]
+
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as e:
+        print(f"\nFailed to parse AI response as JSON: {e}")
+        print(f"Stop reason: {response.stop_reason}")
+        print(f"Raw response (first 500 chars):\n{text[:500]}")
+        raise
 
 
 def main():

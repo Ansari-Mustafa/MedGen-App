@@ -1,0 +1,91 @@
+{
+  "filled": {
+    "appointment_date": null,
+    "appointment_length": null,
+    "appointment_venue": "Carnarvon Medical",
+    "claimant_age": "61",
+    "diagnosis_and_prognosis": "The claimant has sustained soft tissue injuries to the cervical spine and left shoulder consistent with a whiplash-type mechanism of injury. The neck pain commenced the day following the index incident and was initially severe, now reported as moderate. The left shoulder pain similarly commenced the day following the incident, was initially severe, and remains moderate. Despite eight sessions of insurance-provided physiotherapy and ongoing private deep tissue massage therapy on a twice-monthly basis since 2024, the claimant's symptoms have not resolved. Examination reveals restricted range of motion in the cervical spine and left shoulder with tenderness over the left trapezius muscle and a trigger point at the trapezius insertion onto the occiput. An MRI scan of the cervical spine has been recommended to exclude nerve entrapment or structural injury, given the protracted duration of symptoms over approximately four years. A referral to a psychologist is also recommended for the claimant's anxiety and low mood. The case remains open pending the results of the recommended MRI scan. With appropriate hands-on physiotherapy and rehabilitation, further improvement is anticipated, although a definitive prognosis cannot be provided until imaging has been reviewed.",
+    "document_review_notes": null,
+    "effect_on_life": "The claimant reports that the injuries have had a significant impact upon her daily life. She is unable to sleep on her preferred left side due to pain in the left neck and shoulder, resulting in disturbed sleep. She has experienced reduced confidence whilst driving, particularly on narrow country lanes. At the time of the incident, the claimant was the sole driver for her household as her husband was undergoing spinal surgery and was unable to drive. She was required to continue driving despite her injuries to transport her husband to hospital appointments at Salford Royal and to attend work. She reports feeling that the weight of the world was upon her and that she was unable to prioritise her own health. She has been required to employ a gardener as she has a large garden and experiences limitation of movement in her left arm which restricts activities such as pruning hedges. She reports feeling emotionally overwhelmed during the period following the accident.",
+    "effect_on_work": "The claimant was employed as an administrator at a small family-run plumbing company at the time of the index incident. She took one day off work the day following the accident. She was unable to take any further time off or alter her working pattern due to the inflexibility of her employer. She had to arrange physiotherapy appointments before her 10:00 a.m. start time. The claimant was subsequently made redundant by that employer in approximately December 2023. She is no longer in that role.",
+    "examination_date": null,
+    "examination_findings": [
+      "Cervical spine flexion reduced to approximately 70% of normal.",
+      "Cervical spine extension reduced to approximately 50% of normal.",
+      "Cervical spine left rotation reduced to approximately 50% of normal, with pain reported over the left trapezius and top of the left shoulder.",
+      "Cervical spine right rotation reduced to approximately 80% of normal, with a pulling sensation over the left trapezius region.",
+      "Lateral flexion to the right is reduced; lateral flexion to the left is slightly reduced but marginally better than the right.",
+      "Tenderness and a trigger point identified over the left trapezius muscle at its insertion onto the occiput.",
+      "Left shoulder forward flexion limited to approximately 100 degrees.",
+      "Left shoulder abduction limited to approximately 95 degrees, with pain reported in the neck, over the deltoid, in the axillary region, and over the scapula beyond this range.",
+      "Left shoulder internal rotation appears within normal limits bilaterally, reaching approximately T4/T5 level.",
+      "Left shoulder external rotation reduced to approximately 70% of normal.",
+      "Subscapularis testing appeared satisfactory.",
+      "Tenderness identified over the left supraspinatus fossa.",
+      "Right shoulder examination unremarkable with full range of movement.",
+      "The claimant reports a constant dull ache over the left shoulder region."
+    ],
+    "immediate_medical_attendance": "The claimant did not seek immediate medical attention following the incident. She drove herself home. She experienced shock and nausea on the evening of the incident and into the following day.",
+    "incident_date": "05/10/2022",
+    "incident_description": "The claimant was the driver of a motor vehicle travelling over the brow of a hill when four vehicles ahead of her stopped to allow a pedestrian with a dog to cross the road. The claimant brought her vehicle to a halt and engaged the handbrake. A third-party vehicle travelling downhill, having passed through traffic lights, failed to see the claimant's stationary vehicle and collided with the rear of her car at an estimated speed in excess of 30 miles per hour. The impact struck the rear of the claimant's vehicle towards the left side, causing the claimant's car to move to the left. Damage to the claimant's vehicle was predominantly on the left-hand side. The airbags did not deploy. The claimant was wearing her seatbelt at the time. She self-extricated from the vehicle. The third party was initially abusive and threatening towards the claimant but subsequently calmed down and later sent an apology. Both parties moved their vehicles into a nearby pub car park and exchanged details. There were no independent witnesses. The claimant was able to drive her vehicle home.",
+    "instructing_agency": "Premex",
+    "instructing_solicitor": "Carpenters Limited",
+    "is_soft_tissue_case": "Yes",
+    "is_vehicle_occupant": "Yes",
+    "living_arrangements": "The claimant's living arrangements did not change significantly following the incident. She continued to reside in her home and was able to manage the stairs. However, her sleep has been disturbed as she is unable to sleep on her preferred left side due to left-sided neck and shoulder pain, and she is required to sleep on her right side. She has had to employ a gardener to assist with the upkeep of her large garden due to the limitation of movement in her left arm.",
+    "medical_history": "The claimant reports a history of sleep apnoea for which she uses CPAP therapy. She takes no regular medication.",
+    "other_id": "3134448",
+    "past_accidents": "The claimant reports no previous road traffic accidents or relevant past accidents.",
+    "patient_address_city": "Sandbach",
+    "patient_address_line1": "39 Poole Lane, Wintley",
+    "patient_dob": "23/09/1963",
+    "patient_name": "Deborah Jones",
+    "patient_occupation": "Administrator",
+    "patient_postcode": "CW11 4RZ",
+    "photo_id_confirmation": "Yes",
+    "photo_id_type": "Password",
+    "physical_symptoms": [
+      "Neck pain: commenced the day following the incident, initially severe in intensity, currently reported as moderate. The claimant describes pain over the left trapezius region and at its insertion onto the occiput.",
+      "Left shoulder pain: commenced the day following the incident, initially severe in intensity, currently reported as moderate. The claimant describes a constant dull ache over the left shoulder with pain over the supraspinatus fossa, deltoid, axillary region, and scapula on movement.",
+      "Restricted range of movement in the cervical spine, particularly on extension and left rotation.",
+      "Restricted range of movement in the left shoulder, particularly on forward flexion, abduction, and external rotation.",
+      "Disturbed sleep due to inability to lie on the preferred left side secondary to left-sided neck and shoulder pain.",
+      "Nausea experienced on the day of and the day following the incident."
+    ],
+    "pre_existing_conditions": "The claimant reports a pre-existing diagnosis of sleep apnoea for which she receives CPAP therapy. No other pre-existing conditions were reported. No pre-existing neck or shoulder complaints were disclosed.",
+    "psychological_symptoms": "The claimant reports experiencing anxiety and depression following the index incident. She describes initial shock and becoming upset, noting this was her first road traffic accident. She reports reduced confidence in driving, particularly on narrow country lanes. She describes feeling emotionally overwhelmed in the aftermath of the accident, as she was simultaneously caring for her husband who was undergoing spinal surgery, maintaining her employment, and managing her household. She felt unable to prioritise her own health and wellbeing during this period. A referral to a psychologist has been recommended.",
+    "rehabilitative_treatment": "The claimant received eight sessions of physiotherapy provided through the insurance company; however, she reports that four sessions consisted of discussion only, one was cancelled due to the therapist's illness, and the remaining sessions involved instruction on stretching exercises with a towel and use of a ball against a wall for shoulder mobilisation. The claimant did not consider this treatment adequate. She has subsequently been receiving private deep tissue massage therapy on a twice-monthly basis from 2024 to the present, funded at her own expense. The claimant has recently been referred by her GP to MCATS (Musculoskeletal Clinical Assessment and Treatment Service) and attended an appointment on the Tuesday prior to this consultation. A further referral for NHS physiotherapy has been recommended by MCATS. An MRI scan of the cervical spine has been recommended by the examining doctor to investigate the prolonged duration of symptoms. A referral to a psychologist has also been recommended.",
+    "report_date": null,
+    "seatbelt_exemption": "No",
+    "seatbelt_worn": "Yes",
+    "signature_date": null,
+    "subsequent_medical_attendance": "The claimant did not attend her GP in the immediate aftermath of the incident due to competing demands including caring for her husband and maintaining employment. She has recently attended her GP, who referred her to MCATS (Musculoskeletal Clinical Assessment and Treatment Service). She attended MCATS on the Tuesday prior to this consultation, where a referral for NHS physiotherapy was recommended. She has been receiving private deep tissue massage therapy on a twice-monthly basis since 2024.",
+    "vehicle_has_seatbelts": "Yes"
+  },
+  "unfilled": [
+    {
+      "placeholder": "appointment_date",
+      "reason": "The specific date of the consultation is not stated in the transcript."
+    },
+    {
+      "placeholder": "appointment_length",
+      "reason": "The duration of the appointment is not mentioned in the transcript."
+    },
+    {
+      "placeholder": "examination_date",
+      "reason": "The specific date of the examination is not stated in the transcript; it appears to have taken place during the consultation but no date is provided."
+    },
+    {
+      "placeholder": "document_review_notes",
+      "reason": "No documents reviewed or document review notes are discussed in the transcript."
+    },
+    {
+      "placeholder": "report_date",
+      "reason": "The date of the report is not specified in the transcript."
+    },
+    {
+      "placeholder": "signature_date",
+      "reason": "The signature date is not mentioned in the transcript."
+    }
+  ]
+}

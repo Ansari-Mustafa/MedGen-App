@@ -1,5 +1,6 @@
-"""Recordings router — upload endpoint stub. Full pipeline in Phase 2."""
+"""Recordings router — full upload → Storage → enqueue pipeline."""
 import uuid
+
 from fastapi import APIRouter, Depends, UploadFile, File, Form, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -7,10 +8,15 @@ from sqlalchemy import select
 from backend.database import get_db
 from backend.auth import require_staff, get_doctor_id
 from backend.models.recording import Recording
+from backend.models.report import Report
+from backend.models.processing_job import ProcessingJob
 from backend.models.appointment import Appointment
 from backend.schemas.recording import RecordingOut
+from backend.services import storage as store_svc
 
 router = APIRouter(prefix="/recordings", tags=["recordings"])
+
+_ALLOWED_AUDIO_EXTS = {"mp3", "mp4", "wav", "m4a", "webm", "ogg"}
 
 
 @router.post("/upload", response_model=dict, status_code=202)
@@ -24,9 +30,11 @@ async def upload_recording(
     db: AsyncSession = Depends(get_db),
 ):
     """
-    Upload an audio file. Creates a Recording row and enqueues the pipeline.
-    Returns job_id for SSE tracking.
-    Full ARQ enqueue implemented in Phase 2.
+    Upload an audio file.
+    1. Saves to Supabase Storage (audio bucket)
+    2. Creates Recording + Report + ProcessingJob rows
+    3. Enqueues the ARQ pipeline task
+    Returns {recording_id, report_id, job_id} — subscribe to /jobs/{job_id}/stream for SSE.
     """
     doctor_id = get_doctor_id(profile)
 
@@ -37,20 +45,69 @@ async def upload_recording(
     if not result.scalar_one_or_none():
         raise HTTPException(status_code=404, detail="Appointment not found")
 
+    audio_bytes = await file.read()
+    file_ext = (file.filename or "audio.mp3").rsplit(".", 1)[-1].lower()
+    if file_ext not in _ALLOWED_AUDIO_EXTS:
+        file_ext = "mp3"
+
+    # Create Recording row first to get an ID for the storage path
     recording = Recording(
         appointment_id=appointment_id,
         duration_s=duration_s,
-        file_size=file.size,
-        status="pending",
+        file_size=len(audio_bytes),
+        status="processing",
         source=source,
     )
     db.add(recording)
     await db.flush()
 
-    # TODO Phase 2: save file to Supabase Storage, enqueue ARQ pipeline task
-    job_id = str(recording.id)
+    # Upload audio to Supabase Storage
+    storage_path = f"{doctor_id}/{recording.id}.{file_ext}"
+    await store_svc.upload_bytes(
+        store_svc.BUCKET_AUDIO,
+        storage_path,
+        audio_bytes,
+        file.content_type or "audio/mpeg",
+    )
+    recording.storage_path = storage_path
 
-    return {"recording_id": str(recording.id), "job_id": job_id, "status": "queued"}
+    # Create Report row
+    report = Report(
+        appointment_id=appointment_id,
+        template_id=template_id,
+        status="pending",
+    )
+    db.add(report)
+    await db.flush()
+
+    # Create a ProcessingJob row for each step
+    for step in ("transcribe", "fill", "generate"):
+        db.add(ProcessingJob(report_id=report.id, step=step, status="pending"))
+
+    await db.commit()
+
+    # Enqueue ARQ pipeline task
+    from arq import create_pool
+    from arq.connections import RedisSettings
+    from backend.config import get_settings
+
+    settings = get_settings()
+    pool = await create_pool(RedisSettings.from_dsn(settings.redis_url))
+    await pool.enqueue_job(
+        "run_pipeline",
+        recording_id=str(recording.id),
+        report_id=str(report.id),
+        template_id=str(template_id),
+        doctor_user_id=doctor_id,
+    )
+    await pool.aclose()
+
+    return {
+        "recording_id": str(recording.id),
+        "report_id": str(report.id),
+        "job_id": str(report.id),  # SSE endpoint keyed on report_id
+        "status": "queued",
+    }
 
 
 @router.get("/{recording_id}", response_model=RecordingOut)

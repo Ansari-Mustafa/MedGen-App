@@ -39,6 +39,10 @@ class Settings(BaseSettings):
     debug: bool = False
     cors_origins: list[str] = ["http://localhost:8081", "exp://localhost:8081"]
 
+    # Public-facing URL (used by mobile to form WebSocket / API URLs)
+    # Local dev: set to your ngrok HTTPS URL, e.g. https://abc123.ngrok.io
+    api_base_url: str = "http://localhost:8000"
+
 
 @lru_cache
 def get_settings() -> Settings:

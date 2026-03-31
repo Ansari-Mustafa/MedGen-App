@@ -1,0 +1,45 @@
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from functools import lru_cache
+
+
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_file="../.env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
+
+    # Supabase
+    supabase_url: str = ""
+    supabase_anon_key: str = ""
+    supabase_service_role_key: str = ""
+    supabase_jwt_secret: str = ""
+
+    # Database
+    database_url: str = ""  # postgresql+asyncpg://...
+
+    # Redis / ARQ
+    redis_url: str = "redis://localhost:6379"
+
+    # AI providers
+    anthropic_api_key: str = ""
+    openai_api_key: str = ""
+
+    # STT providers
+    elevenlabs_api_key: str = ""
+    deepgram_api_key: str = ""
+
+    # Provider selection (swappable)
+    stt_provider: str = "elevenlabs"   # elevenlabs | deepgram | assemblyai
+    ai_provider: str = "anthropic"     # anthropic | openai
+    ai_model: str = "claude-opus-4-6"
+
+    # App
+    app_name: str = "MedGen API"
+    debug: bool = False
+    cors_origins: list[str] = ["http://localhost:8081", "exp://localhost:8081"]
+
+
+@lru_cache
+def get_settings() -> Settings:
+    return Settings()

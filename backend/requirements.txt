@@ -1,0 +1,27 @@
+fastapi>=0.135
+uvicorn[standard]>=0.34
+sqlalchemy[asyncio]>=2.0
+asyncpg>=0.30
+psycopg2-binary>=2.9
+alembic>=1.14
+arq>=0.27
+redis>=5.3
+supabase==2.28.3
+PyJWT[crypto]>=2.10          # JWKS-based JWT verification (replaces python-jose)
+python-multipart>=0.0.20
+python-dotenv>=1.1
+pydantic>=2.12
+pydantic-settings>=2.7
+pydantic[email]
+httpx>=0.28
+
+# AI
+anthropic>=0.50
+
+# STT
+elevenlabs>=2.3
+deepgram-sdk>=3.10
+
+# Document processing
+python-docx>=1.1
+docxtpl>=0.19

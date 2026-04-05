@@ -1,4 +1,4 @@
-export const USE_MOCK = true; // Set to false to use real backend API
+export const USE_MOCK = false; // Set to true to use mock data instead of real backend API
 
 export const API_BASE_URL =
   process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:8000';

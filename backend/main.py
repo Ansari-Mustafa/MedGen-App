@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.config import get_settings
-from backend.routers import patients, appointments, notifications, reports, recordings, stream, templates, ws
+from backend.routers import patients, appointments, notifications, reports, recordings, stream, templates, ws, me
 
 settings = get_settings()
 
@@ -29,6 +29,7 @@ app.include_router(recordings.router)
 app.include_router(stream.router)
 app.include_router(templates.router)
 app.include_router(ws.router)
+app.include_router(me.router)
 
 
 @app.get("/health")

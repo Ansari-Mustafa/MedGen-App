@@ -1,6 +1,7 @@
-"""Reports router — stubs for Phase 1. Full implementation in Phase 2-3."""
+"""Reports router."""
 import uuid
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -9,6 +10,7 @@ from backend.auth import require_staff, get_doctor_id
 from backend.models.report import Report
 from backend.models.appointment import Appointment
 from backend.schemas.report import ReportOut, ReportEditSave
+from backend.services import storage as store_svc
 
 router = APIRouter(prefix="/reports", tags=["reports"])
 
@@ -92,3 +94,29 @@ async def approve_report(
     report.status = "approved"
     report.approved_at = datetime.now(timezone.utc)
     return report
+
+
+@router.get("/{report_id}/download")
+async def download_report(
+    report_id: uuid.UUID,
+    format: str = Query(default="docx", pattern="^(docx|pdf)$"),
+    profile=Depends(require_staff),
+    db: AsyncSession = Depends(get_db),
+):
+    """Return a signed URL (valid 60 min) for DOCX or PDF download."""
+    doctor_id = get_doctor_id(profile)
+    result = await db.execute(
+        select(Report)
+        .join(Appointment, Report.appointment_id == Appointment.id)
+        .where(Report.id == report_id, Appointment.doctor_id == doctor_id)
+    )
+    report = result.scalar_one_or_none()
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+
+    path = report.pdf_path if format == "pdf" else report.docx_path
+    if not path:
+        raise HTTPException(status_code=404, detail=f"{format.upper()} not yet generated")
+
+    url = await store_svc.get_signed_url(store_svc.BUCKET_REPORTS, path, expires_in=3600)
+    return JSONResponse({"url": url, "format": format})

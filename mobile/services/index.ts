@@ -7,15 +7,16 @@ import * as mockReports from './mock/handlers/reports';
 import * as mockAppointments from './mock/handlers/appointments';
 import * as mockDashboard from './mock/handlers/dashboard';
 
-// Real API services (stubs for now — will be implemented in Phase 6)
-// import * as apiAuth from './api/auth';
-// import * as apiPatients from './api/patients';
-// import * as apiReports from './api/reports';
-// import * as apiAppointments from './api/appointments';
-// import * as apiDashboard from './api/dashboard';
+// Real API services
+import * as apiAuth from './api/auth';
+import * as apiPatients from './api/patients';
+import * as apiReports from './api/reports';
+import * as apiAppointments from './api/appointments';
 
-export const authService = USE_MOCK ? mockAuth : mockAuth;
-export const patientService = USE_MOCK ? mockPatients : mockPatients;
-export const reportService = USE_MOCK ? mockReports : mockReports;
-export const appointmentService = USE_MOCK ? mockAppointments : mockAppointments;
-export const dashboardService = USE_MOCK ? mockDashboard : mockDashboard;
+export const authService = USE_MOCK ? mockAuth : apiAuth;
+export const patientService = USE_MOCK ? mockPatients : apiPatients;
+export const reportService = USE_MOCK ? mockReports : apiReports;
+export const appointmentService = USE_MOCK ? mockAppointments : apiAppointments;
+
+// Dashboard is mock-only until a real /dashboard endpoint is added
+export const dashboardService = mockDashboard;

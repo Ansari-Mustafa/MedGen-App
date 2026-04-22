@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
   Alert,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as DocumentPicker from 'expo-document-picker';
 import { Mic, Upload, User, ChevronRight, Square, CheckCircle, AlertCircle, FileText } from 'lucide-react-native';
 import { useQuery } from '@tanstack/react-query';
@@ -18,20 +18,12 @@ import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { colors } from '@/constants/theme';
-import { formatDuration } from '@/utils/formatting';
+import { formatDuration, formatDateTime } from '@/utils/formatting';
 import { useRecording } from '@/hooks/useRecording';
 import { usePipelineStatus } from '@/hooks/usePipelineStatus';
 import { getAppointments } from '@/services/api/appointments';
 import { getTemplates, Template } from '@/services/api/templates';
-
-// ─── Types ───────────────────────────────────────────────────────────────────
-
-interface Appointment {
-  id: string;
-  patient_name?: string;
-  appointment_date?: string;
-  [key: string]: unknown;
-}
+import type { Appointment } from '@/types/models';
 
 // ─── Picker Modal ─────────────────────────────────────────────────────────────
 
@@ -236,6 +228,7 @@ function PipelineOverlay({
 // ─── Main Screen ──────────────────────────────────────────────────────────────
 
 export default function RecordScreen() {
+  const params = useLocalSearchParams<{ appointmentId?: string }>();
   const [selectedMode, setSelectedMode] = useState<'record' | 'upload'>('record');
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
@@ -244,10 +237,24 @@ export default function RecordScreen() {
   const [reportId, setReportId] = useState<string | null>(null);
   const [showPipeline, setShowPipeline] = useState(false);
 
-  const { data: appointments = [], isLoading: loadingAppts } = useQuery({
+  const { data: appointments = [], isLoading: loadingAppts } = useQuery<Appointment[]>({
     queryKey: ['appointments'],
-    queryFn: () => getAppointments().then((r) => r.data ?? r),
+    queryFn: getAppointments,
   });
+
+  const appointmentOptions = appointments.map((a) => ({
+    ...a,
+    display_name: a.patient_name ?? 'Unknown patient',
+    display_when: formatDateTime(a.scheduled_at),
+  }));
+
+  // Preselect appointment if ?appointmentId= was passed in
+  useEffect(() => {
+    if (params.appointmentId && !selectedAppointment && appointments.length > 0) {
+      const match = appointments.find((a) => a.id === params.appointmentId);
+      if (match) setSelectedAppointment(match);
+    }
+  }, [params.appointmentId, appointments, selectedAppointment]);
 
   const { data: templates = [], isLoading: loadingTemplates } = useQuery({
     queryKey: ['templates'],
@@ -386,7 +393,7 @@ export default function RecordScreen() {
               </Text>
               <Text style={{ fontSize: 13, color: colors.gray[500] }}>
                 {selectedAppointment
-                  ? String(selectedAppointment.appointment_date ?? '')
+                  ? formatDateTime(selectedAppointment.scheduled_at)
                   : 'Choose the patient appointment'}
               </Text>
             </View>
@@ -559,14 +566,14 @@ export default function RecordScreen() {
       </ScrollView>
 
       {/* Appointment picker modal */}
-      <PickerModal<Appointment>
+      <PickerModal
         visible={showAppointmentPicker}
         title="Select Appointment"
-        items={appointments as Appointment[]}
+        items={appointmentOptions}
         loading={loadingAppts}
-        labelKey="patient_name"
-        subLabelKey="appointment_date"
-        onSelect={setSelectedAppointment}
+        labelKey="display_name"
+        subLabelKey="display_when"
+        onSelect={(item) => setSelectedAppointment(item as unknown as Appointment)}
         onClose={() => setShowAppointmentPicker(false)}
       />
 

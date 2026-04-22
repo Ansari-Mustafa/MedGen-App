@@ -1,11 +1,12 @@
 import { View, StyleSheet } from 'react-native';
-import { Tabs, useRouter } from 'expo-router';
+import { Tabs, useRouter, Redirect } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Mic } from 'lucide-react-native';
 import { HapticTab } from '@/components/haptic-tab';
 import { Colors, colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Pressable } from 'react-native';
+import { useAuthStore } from '@/stores/authStore';
 
 type IoniconsName = React.ComponentProps<typeof Ionicons>['name'];
 
@@ -41,6 +42,13 @@ function RecordFAB() {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const { isAuthenticated, user, isLoading } = useAuthStore();
+
+  // Auth guard: only authenticated users with a loaded profile may see tabs.
+  // This runs BEFORE any tab screen mounts, so no protected data is fetched.
+  if (!isLoading && !(isAuthenticated && user)) {
+    return <Redirect href="/(auth)/welcome" />;
+  }
 
   return (
     <Tabs

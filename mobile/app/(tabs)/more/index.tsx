@@ -69,17 +69,13 @@ export default function MoreScreen() {
             paddingVertical: 20,
           }}
         >
-          <Avatar
-            firstName={user?.first_name ?? 'D'}
-            lastName={user?.last_name ?? 'S'}
-            size={56}
-          />
+          <Avatar name={user?.full_name ?? 'Doctor'} size={56} />
           <View style={{ flex: 1 }}>
             <Text style={{ fontSize: 20, fontWeight: '700', color: colors.gray[900] }}>
-              {user?.title} {user?.first_name} {user?.last_name}
+              {user?.full_name ?? '-'}
             </Text>
             <Text style={{ fontSize: 14, color: colors.gray[500], marginTop: 2 }}>
-              {user?.specialty ?? 'General Practice'}
+              {user?.role === 'secretary' ? 'Secretary' : 'Doctor'}
             </Text>
           </View>
           <ChevronRight size={20} color={colors.gray[300]} strokeWidth={2} />
@@ -146,7 +142,7 @@ export default function MoreScreen() {
 
         {/* Sign out */}
         <Pressable
-          onPress={logout}
+          onPress={() => logout()}
           style={{
             flexDirection: 'row',
             alignItems: 'center',

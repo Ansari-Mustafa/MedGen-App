@@ -9,6 +9,7 @@ class ReportOut(OrmBase):
     id: uuid.UUID
     appointment_id: uuid.UUID
     template_id: uuid.UUID
+    patient_name: Optional[str] = None
     filled_json: dict
     docx_path: Optional[str]
     pdf_path: Optional[str]

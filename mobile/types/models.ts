@@ -1,235 +1,128 @@
-// ── User / Auth ──────────────────────────────────────────────
+// ── User / Profile ───────────────────────────────────────────
 
 export interface User {
-  id: number;
-  email: string;
-  first_name: string;
-  last_name: string;
-  title: string;
-  specialty: string;
-  phone: string;
-  license_number: string;
-  profile_image_url: string | null;
-  is_active: boolean;
-  onboarding_completed: boolean;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface AuthTokens {
-  access_token: string;
-  refresh_token: string;
-  token_type: string;
-}
-
-export interface LoginRequest {
-  email: string;
-  password: string;
-}
-
-export interface SignupRequest {
-  email: string;
-  password: string;
-  first_name: string;
-  last_name: string;
-  title: string;
-  specialty: string;
+  id: string;
+  email: string | null;
+  full_name: string;
+  role: 'doctor' | 'secretary';
+  phone: string | null;
+  avatar_url: string | null;
+  clinic_id: string | null;
+  doctor_id: string | null;
+  expo_push_token: string | null;
 }
 
 // ── Patient ──────────────────────────────────────────────────
 
 export interface Patient {
-  id: number;
-  doctor_id: number;
-  first_name: string;
-  last_name: string;
-  date_of_birth: string;
-  email: string | null;
-  phone: string | null;
+  id: string;
+  doctor_id: string;
+  full_name: string;
+  dob: string | null;
   address: string | null;
-  medical_record_number: string | null;
-  nhs_number: string | null;
-  gender: string | null;
-  emergency_contact_name: string | null;
-  emergency_contact_phone: string | null;
+  nino: string | null;
+  phone: string | null;
+  email: string | null;
   notes: string | null;
-  is_active: boolean;
   created_at: string;
   updated_at: string;
 }
 
 export interface PatientCreate {
-  first_name: string;
-  last_name: string;
-  date_of_birth: string;
-  email?: string;
-  phone?: string;
+  full_name: string;
+  dob?: string;
   address?: string;
-  medical_record_number?: string;
-  nhs_number?: string;
-  gender?: string;
+  nino?: string;
+  phone?: string;
+  email?: string;
   notes?: string;
 }
 
 export type PatientUpdate = Partial<PatientCreate>;
 
-// ── Medical Report ───────────────────────────────────────────
-
-export interface MedicalReport {
-  id: number;
-  doctor_id: number;
-  patient_id: number;
-  patient_name: string;
-  template_id: number | null;
-  recording_id: number | null;
-  transcription_id: number | null;
-  title: string;
-  content: string;
-  format: 'html' | 'markdown' | 'text';
-  status: 'generating' | 'generated' | 'reviewed' | 'approved' | 'exported';
-  version: number;
-  current_version: boolean;
-  report_date: string;
-  metadata: Record<string, unknown> | null;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface ReportUpdate {
-  title?: string;
-  content?: string;
-  status?: MedicalReport['status'];
-}
-
-// ── Audio / Recording ────────────────────────────────────────
-
-export interface AudioRecording {
-  id: number;
-  doctor_id: number;
-  patient_id: number;
-  patient_name: string;
-  session_name: string;
-  file_path: string;
-  file_size: number;
-  duration: number;
-  format: string;
-  quality_score: number | null;
-  status: 'uploaded' | 'processing' | 'transcribed' | 'failed';
-  created_at: string;
-}
-
-// ── Transcription ────────────────────────────────────────────
-
-export interface Transcription {
-  id: number;
-  recording_id: number;
-  doctor_id: number;
-  patient_id: number;
-  content: string;
-  word_count: number;
-  confidence_score: number | null;
-  language: string;
-  speaker_labels: Record<string, string> | null;
-  status: 'processing' | 'completed' | 'failed';
-  created_at: string;
-}
-
 // ── Appointment ──────────────────────────────────────────────
 
+export type AppointmentStatus = 'scheduled' | 'completed' | 'cancelled';
+
 export interface Appointment {
-  id: number;
-  doctor_id: number;
-  patient_id: number;
-  patient_name: string;
-  clinic_id: number | null;
-  clinic_name: string | null;
-  appointment_date: string;
-  start_time: string;
-  end_time: string;
-  appointment_type: 'consultation' | 'follow_up' | 'review' | 'procedure';
-  status: 'scheduled' | 'confirmed' | 'in_progress' | 'completed' | 'cancelled' | 'no_show';
-  priority: 'routine' | 'urgent' | 'emergency';
-  reason: string | null;
+  id: string;
+  patient_id: string;
+  doctor_id: string;
+  patient_name: string | null;
+  scheduled_at: string | null;
+  status: AppointmentStatus;
+  type: string | null;
   notes: string | null;
   created_at: string;
   updated_at: string;
 }
 
 export interface AppointmentCreate {
-  patient_id: number;
-  clinic_id?: number;
-  appointment_date: string;
-  start_time: string;
-  end_time: string;
-  appointment_type: Appointment['appointment_type'];
-  priority?: Appointment['priority'];
-  reason?: string;
+  patient_id: string;
+  scheduled_at?: string;
+  type?: string;
   notes?: string;
 }
 
-// ── Subscription ─────────────────────────────────────────────
-
-export interface SubscriptionPlan {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  billing_cycle: 'monthly' | 'yearly';
-  reports_limit: number;
-  recordings_limit: number;
-  storage_limit_mb: number;
-  features: string[];
-  is_active: boolean;
+export interface AppointmentUpdate {
+  scheduled_at?: string;
+  status?: AppointmentStatus;
+  type?: string;
+  notes?: string;
 }
 
-export interface UserSubscription {
-  id: number;
-  user_id: number;
-  plan_id: number;
-  plan_name: string;
-  status: 'active' | 'cancelled' | 'expired' | 'trial';
-  current_period_start: string;
-  current_period_end: string;
-  reports_used: number;
-  reports_limit: number;
-  recordings_used: number;
-  recordings_limit: number;
-}
+// ── Medical Report ───────────────────────────────────────────
 
-// ── Template ─────────────────────────────────────────────────
+export type ReportStatus = 'pending' | 'generating' | 'ready' | 'approved' | 'error';
 
-export interface DoctorTemplate {
-  id: number;
-  doctor_id: number;
-  name: string;
-  description: string | null;
-  template_type: string;
-  content: string;
-  is_default: boolean;
-  is_active: boolean;
+export interface MedicalReport {
+  id: string;
+  appointment_id: string;
+  template_id: string;
+  patient_name: string | null;
+  filled_json: Record<string, unknown>;
+  docx_path: string | null;
+  pdf_path: string | null;
+  status: ReportStatus;
+  approved_at: string | null;
   created_at: string;
   updated_at: string;
 }
 
-// ── Clinic ───────────────────────────────────────────────────
+// ── Dashboard ────────────────────────────────────────────────
 
-export interface Clinic {
-  id: number;
-  name: string;
-  address: string;
-  phone: string | null;
-  email: string | null;
-  is_active: boolean;
+export interface DashboardRecentReport {
+  id: string;
+  patient_name: string | null;
+  status: ReportStatus;
   created_at: string;
 }
 
-// ── Dashboard Stats ──────────────────────────────────────────
+export interface DashboardUpcomingAppointment {
+  id: string;
+  patient_name: string | null;
+  scheduled_at: string | null;
+  status: AppointmentStatus;
+}
 
 export interface DashboardStats {
   total_patients: number;
   total_reports: number;
   reports_this_month: number;
   upcoming_appointments: number;
-  recent_reports: MedicalReport[];
-  upcoming_appointments_list: Appointment[];
+  recent_reports: DashboardRecentReport[];
+  upcoming_appointments_list: DashboardUpcomingAppointment[];
+}
+
+// ── Template ─────────────────────────────────────────────────
+
+export interface DoctorTemplate {
+  id: string;
+  doctor_id: string;
+  name: string;
+  docx_storage_path: string | null;
+  placeholders: string[] | null;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
 }

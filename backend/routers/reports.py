@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 
 from backend.database import get_db
 from backend.auth import require_staff, get_doctor_id
@@ -15,6 +16,28 @@ from backend.services import storage as store_svc
 router = APIRouter(prefix="/reports", tags=["reports"])
 
 
+def _serialize(report: Report) -> dict:
+    appt = report.appointment
+    patient_name = appt.patient.full_name if appt and appt.patient else None
+    return {
+        "id": report.id,
+        "appointment_id": report.appointment_id,
+        "template_id": report.template_id,
+        "patient_name": patient_name,
+        "filled_json": report.filled_json or {},
+        "docx_path": report.docx_path,
+        "pdf_path": report.pdf_path,
+        "status": report.status,
+        "approved_at": report.approved_at,
+        "created_at": report.created_at,
+        "updated_at": report.updated_at,
+    }
+
+
+def _report_with_patient():
+    return selectinload(Report.appointment).selectinload(Appointment.patient)
+
+
 @router.get("", response_model=list[ReportOut])
 async def list_reports(
     profile=Depends(require_staff),
@@ -23,11 +46,12 @@ async def list_reports(
     doctor_id = get_doctor_id(profile)
     result = await db.execute(
         select(Report)
+        .options(_report_with_patient())
         .join(Appointment, Report.appointment_id == Appointment.id)
         .where(Appointment.doctor_id == doctor_id)
         .order_by(Report.created_at.desc())
     )
-    return result.scalars().all()
+    return [_serialize(r) for r in result.scalars().all()]
 
 
 @router.get("/{report_id}", response_model=ReportOut)
@@ -39,13 +63,14 @@ async def get_report(
     doctor_id = get_doctor_id(profile)
     result = await db.execute(
         select(Report)
+        .options(_report_with_patient())
         .join(Appointment, Report.appointment_id == Appointment.id)
         .where(Report.id == report_id, Appointment.doctor_id == doctor_id)
     )
     report = result.scalar_one_or_none()
     if not report:
         raise HTTPException(status_code=404, detail="Report not found")
-    return report
+    return _serialize(report)
 
 
 @router.patch("/{report_id}/fields", response_model=ReportOut)
@@ -59,6 +84,7 @@ async def save_edits(
     doctor_id = get_doctor_id(profile)
     result = await db.execute(
         select(Report)
+        .options(_report_with_patient())
         .join(Appointment, Report.appointment_id == Appointment.id)
         .where(Report.id == report_id, Appointment.doctor_id == doctor_id)
     )
@@ -66,11 +92,10 @@ async def save_edits(
     if not report:
         raise HTTPException(status_code=404, detail="Report not found")
 
-    # Merge edits into filled_json and store correction pairs
-    updated = {**report.filled_json, **body.fields}
+    updated = {**(report.filled_json or {}), **body.fields}
     report.filled_json = updated
     report.edits_json = body.fields
-    return report
+    return _serialize(report)
 
 
 @router.post("/{report_id}/approve", response_model=ReportOut)
@@ -84,6 +109,7 @@ async def approve_report(
     doctor_id = get_doctor_id(profile)
     result = await db.execute(
         select(Report)
+        .options(_report_with_patient())
         .join(Appointment, Report.appointment_id == Appointment.id)
         .where(Report.id == report_id, Appointment.doctor_id == doctor_id)
     )
@@ -93,7 +119,7 @@ async def approve_report(
 
     report.status = "approved"
     report.approved_at = datetime.now(timezone.utc)
-    return report
+    return _serialize(report)
 
 
 @router.get("/{report_id}/download")

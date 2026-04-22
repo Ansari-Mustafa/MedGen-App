@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
 import { View, Text, ScrollView, SafeAreaView, Pressable, RefreshControl } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useQuery } from '@tanstack/react-query';
 import { Mic, Users, FileText, Calendar } from 'lucide-react-native';
 import { useAuthStore } from '@/stores/authStore';
-import { dashboardService } from '@/services';
+import { api } from '@/lib/api';
 import { Card } from '@/components/ui/Card';
 import { StatCard } from '@/components/ui/StatCard';
 import { Badge } from '@/components/ui/Badge';
 import { Avatar } from '@/components/ui/Avatar';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { colors } from '@/constants/theme';
-import { getGreeting, formatDate, timeAgo } from '@/utils/formatting';
+import { getGreeting, formatDateTime, timeAgo } from '@/utils/formatting';
 import type { DashboardStats } from '@/types/models';
 
 const quickActions = [
@@ -20,28 +20,22 @@ const quickActions = [
   { label: 'Schedule', Icon: Calendar, route: '/(tabs)/appointments', color: colors.warning.DEFAULT },
 ];
 
+function lastNameOf(fullName: string | null | undefined): string {
+  if (!fullName) return '';
+  const parts = fullName.trim().split(/\s+/);
+  return parts[parts.length - 1] ?? '';
+}
+
 export default function DashboardScreen() {
   const router = useRouter();
   const { user } = useAuthStore();
-  const [stats, setStats] = useState<DashboardStats | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
 
-  const fetchStats = async () => {
-    try {
-      const data = await dashboardService.getDashboardStats();
-      setStats(data);
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  };
+  const { data: stats, isLoading, refetch, isRefetching } = useQuery<DashboardStats>({
+    queryKey: ['dashboard'],
+    queryFn: () => api.get('/dashboard').then((r) => r.data),
+  });
 
-  useEffect(() => {
-    fetchStats();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return <LoadingSpinner fullScreen message="Loading dashboard..." />;
   }
 
@@ -51,16 +45,12 @@ export default function DashboardScreen() {
         contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 24 }}
         refreshControl={
           <RefreshControl
-            refreshing={refreshing}
-            onRefresh={() => {
-              setRefreshing(true);
-              fetchStats();
-            }}
+            refreshing={isRefetching}
+            onRefresh={refetch}
             tintColor={colors.primary[800]}
           />
         }
       >
-        {/* Greeting Header */}
         <View style={{ paddingTop: 16, paddingBottom: 20 }}>
           <Text style={{ fontSize: 14, color: colors.gray[500], fontWeight: '500' }}>
             {getGreeting()}
@@ -73,11 +63,10 @@ export default function DashboardScreen() {
               letterSpacing: -0.5,
             }}
           >
-            Dr {user?.last_name ?? 'Smith'}
+            {user?.full_name ? `Dr ${lastNameOf(user.full_name)}` : 'Welcome'}
           </Text>
         </View>
 
-        {/* Stats Grid */}
         <View style={{ flexDirection: 'row', gap: 12, marginBottom: 12 }}>
           <StatCard
             label="Patients"
@@ -107,7 +96,6 @@ export default function DashboardScreen() {
           />
         </View>
 
-        {/* Quick Actions */}
         <Text style={{ fontSize: 18, fontWeight: '700', color: colors.gray[900], marginBottom: 12 }}>
           Quick Actions
         </Text>
@@ -149,79 +137,89 @@ export default function DashboardScreen() {
           ))}
         </View>
 
-        {/* Recent Reports */}
         <Text style={{ fontSize: 18, fontWeight: '700', color: colors.gray[900], marginBottom: 12 }}>
           Recent Reports
         </Text>
         <View style={{ gap: 10, marginBottom: 24 }}>
-          {stats?.recent_reports.map((report) => (
-            <Card key={report.id} variant="elevated" padding={14}>
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-                <Avatar
-                  firstName={report.patient_name.split(' ')[0]}
-                  lastName={report.patient_name.split(' ')[1] ?? ''}
-                  size={40}
-                />
-                <View style={{ flex: 1 }}>
-                  <Text
-                    style={{ fontSize: 15, fontWeight: '600', color: colors.gray[900] }}
-                    numberOfLines={1}
-                  >
-                    {report.title}
-                  </Text>
-                  <Text style={{ fontSize: 13, color: colors.gray[500], marginTop: 2 }}>
-                    {report.patient_name} · {timeAgo(report.created_at)}
-                  </Text>
-                </View>
-                <Badge
-                  label={report.status}
-                  variant={
-                    report.status === 'approved'
-                      ? 'success'
-                      : report.status === 'generating'
-                        ? 'warning'
-                        : 'default'
-                  }
-                />
-              </View>
+          {(stats?.recent_reports ?? []).length === 0 ? (
+            <Card variant="outlined" padding={16}>
+              <Text style={{ fontSize: 14, color: colors.gray[500] }}>
+                No reports yet. Record a session to generate your first report.
+              </Text>
             </Card>
-          ))}
+          ) : (
+            stats!.recent_reports.map((report) => (
+              <Pressable
+                key={report.id}
+                onPress={() => router.push(`/(tabs)/reports/${report.id}` as never)}
+              >
+                <Card variant="elevated" padding={14}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                    <Avatar name={report.patient_name} size={40} />
+                    <View style={{ flex: 1 }}>
+                      <Text
+                        style={{ fontSize: 15, fontWeight: '600', color: colors.gray[900] }}
+                        numberOfLines={1}
+                      >
+                        {report.patient_name ?? 'Unknown patient'}
+                      </Text>
+                      <Text style={{ fontSize: 13, color: colors.gray[500], marginTop: 2 }}>
+                        {timeAgo(report.created_at)}
+                      </Text>
+                    </View>
+                    <Badge
+                      label={report.status}
+                      variant={
+                        report.status === 'approved'
+                          ? 'success'
+                          : report.status === 'generating' || report.status === 'pending'
+                            ? 'warning'
+                            : 'default'
+                      }
+                    />
+                  </View>
+                </Card>
+              </Pressable>
+            ))
+          )}
         </View>
 
-        {/* Upcoming Appointments */}
         <Text style={{ fontSize: 18, fontWeight: '700', color: colors.gray[900], marginBottom: 12 }}>
           Upcoming Appointments
         </Text>
         <View style={{ gap: 10 }}>
-          {stats?.upcoming_appointments_list.map((appt) => (
-            <Card key={appt.id} variant="elevated" padding={14}>
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-                <Avatar
-                  firstName={appt.patient_name.split(' ')[0]}
-                  lastName={appt.patient_name.split(' ')[1] ?? ''}
-                  size={40}
-                />
-                <View style={{ flex: 1 }}>
-                  <Text style={{ fontSize: 15, fontWeight: '600', color: colors.gray[900] }}>
-                    {appt.patient_name}
-                  </Text>
-                  <Text style={{ fontSize: 13, color: colors.gray[500], marginTop: 2 }}>
-                    {formatDate(appt.appointment_date)} · {appt.start_time}
-                  </Text>
-                </View>
-                <Badge
-                  label={appt.status}
-                  variant={
-                    appt.status === 'confirmed'
-                      ? 'success'
-                      : appt.status === 'scheduled'
-                        ? 'info'
-                        : 'default'
-                  }
-                />
-              </View>
+          {(stats?.upcoming_appointments_list ?? []).length === 0 ? (
+            <Card variant="outlined" padding={16}>
+              <Text style={{ fontSize: 14, color: colors.gray[500] }}>
+                No upcoming appointments. Tap the Schedule action to add one.
+              </Text>
             </Card>
-          ))}
+          ) : (
+            stats!.upcoming_appointments_list.map((appt) => (
+              <Pressable
+                key={appt.id}
+                onPress={() => router.push(`/(tabs)/appointments/${appt.id}` as never)}
+              >
+                <Card variant="elevated" padding={14}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                    <Avatar name={appt.patient_name} size={40} />
+                    <View style={{ flex: 1 }}>
+                      <Text style={{ fontSize: 15, fontWeight: '600', color: colors.gray[900] }}>
+                        {appt.patient_name ?? 'Unknown patient'}
+                      </Text>
+                      <Text style={{ fontSize: 13, color: colors.gray[500], marginTop: 2 }}>
+                        {formatDateTime(appt.scheduled_at)}
+                      </Text>
+                    </View>
+                    <Badge
+                      label={appt.status}
+                      variant={appt.status === 'completed' ? 'info' : 'success'}
+                    />
+                  </View>
+                </Card>
+              </Pressable>
+            ))
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

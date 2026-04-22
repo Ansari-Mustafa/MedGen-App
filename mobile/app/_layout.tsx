@@ -16,6 +16,8 @@ SplashScreen.preventAutoHideAsync();
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
+    shouldShowBanner: true,
+    shouldShowList: true,
     shouldPlaySound: true,
     shouldSetBadge: false,
   }),
@@ -47,7 +49,7 @@ async function registerPushToken(updateProfile: (data: object) => Promise<void>)
 }
 
 export default function RootLayout() {
-  const { isAuthenticated, isLoading, loadStoredAuth, updateProfile } = useAuthStore();
+  const { isAuthenticated, isLoading, user, loadStoredAuth, updateProfile } = useAuthStore();
 
   useEffect(() => {
     loadStoredAuth().finally(() => {
@@ -55,28 +57,30 @@ export default function RootLayout() {
     });
   }, []);
 
-  // Manage WebSocket lifecycle + push token based on auth state
+  const effectivelyAuthenticated = isAuthenticated && !!user;
+
   useEffect(() => {
-    if (isAuthenticated) {
+    if (effectivelyAuthenticated) {
       wsManager.connect();
       registerPushToken(updateProfile);
     } else {
       wsManager.disconnect();
     }
-  }, [isAuthenticated]);
+  }, [effectivelyAuthenticated]);
 
   if (isLoading) {
     return <LoadingSpinner fullScreen message="Loading..." />;
   }
 
+  // Routes are registered unconditionally. The actual gating happens inside
+  // each group's _layout.tsx via <Redirect>. Registering both groups here
+  // without conditionals lets the redirect take effect before the target
+  // screen mounts.
   return (
     <QueryClientProvider client={queryClient}>
       <Stack screenOptions={{ headerShown: false }}>
-        {!isAuthenticated ? (
-          <Stack.Screen name="(auth)" />
-        ) : (
-          <Stack.Screen name="(tabs)" />
-        )}
+        <Stack.Screen name="(auth)" />
+        <Stack.Screen name="(tabs)" />
       </Stack>
       <StatusBar style="dark" />
     </QueryClientProvider>

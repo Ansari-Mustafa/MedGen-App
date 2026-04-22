@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, FlatList, Pressable } from 'react-native';
+import { useState } from 'react';
+import { View, Text, SafeAreaView, FlatList, Pressable, RefreshControl } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Plus, Users, ChevronRight } from 'lucide-react-native';
-import { patientService } from '@/services';
+import { getPatients } from '@/services/api/patients';
 import { Card } from '@/components/ui/Card';
 import { Avatar } from '@/components/ui/Avatar';
 import { SearchBar } from '@/components/ui/SearchBar';
@@ -13,29 +14,24 @@ import type { Patient } from '@/types/models';
 
 export default function PatientsListScreen() {
   const router = useRouter();
-  const [patients, setPatients] = useState<Patient[]>([]);
-  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
 
-  useEffect(() => {
-    patientService.getPatients().then((data) => {
-      setPatients(data);
-      setLoading(false);
-    });
-  }, []);
+  const { data: patients = [], isLoading, refetch, isRefetching } = useQuery<Patient[]>({
+    queryKey: ['patients'],
+    queryFn: getPatients,
+  });
 
   const filtered = patients.filter(
     (p) =>
-      `${p.first_name} ${p.last_name}`.toLowerCase().includes(search.toLowerCase()) ||
-      p.email?.toLowerCase().includes(search.toLowerCase())
+      p.full_name.toLowerCase().includes(search.toLowerCase()) ||
+      (p.email?.toLowerCase().includes(search.toLowerCase()) ?? false)
   );
 
-  if (loading) return <LoadingSpinner fullScreen />;
+  if (isLoading) return <LoadingSpinner fullScreen />;
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.gray[50] }}>
       <View style={{ paddingHorizontal: 20, paddingTop: 16, paddingBottom: 12 }}>
-        {/* Header with back */}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 16 }}>
           <Pressable onPress={() => router.back()} hitSlop={12}>
             <ArrowLeft size={24} color={colors.gray[900]} strokeWidth={2} />
@@ -52,6 +48,7 @@ export default function PatientsListScreen() {
             Patients
           </Text>
           <Pressable
+            onPress={() => router.push('/(tabs)/more/patients/new' as never)}
             style={{
               width: 36,
               height: 36,
@@ -69,22 +66,23 @@ export default function PatientsListScreen() {
 
       <FlatList
         data={filtered}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 24, gap: 10 }}
+        refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}
         renderItem={({ item }) => (
           <Card variant="elevated" padding={14}>
             <Pressable
               onPress={() => router.push(`/(tabs)/more/patients/${item.id}` as never)}
               style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}
             >
-              <Avatar firstName={item.first_name} lastName={item.last_name} size={44} />
+              <Avatar name={item.full_name} size={44} />
               <View style={{ flex: 1 }}>
                 <Text style={{ fontSize: 15, fontWeight: '600', color: colors.gray[900] }}>
-                  {item.first_name} {item.last_name}
+                  {item.full_name}
                 </Text>
                 <Text style={{ fontSize: 13, color: colors.gray[500], marginTop: 2 }}>
-                  DOB: {formatDate(item.date_of_birth)}
-                  {item.nhs_number ? ` · NHS: ${item.nhs_number}` : ''}
+                  DOB: {formatDate(item.dob)}
+                  {item.nino ? ` · NI: ${item.nino}` : ''}
                 </Text>
               </View>
               <ChevronRight size={18} color={colors.gray[300]} strokeWidth={2} />
@@ -106,7 +104,10 @@ export default function PatientsListScreen() {
               <Users size={32} color={colors.gray[500]} strokeWidth={1.5} />
             </View>
             <Text style={{ fontSize: 16, fontWeight: '600', color: colors.gray[700] }}>
-              No patients found
+              No patients yet
+            </Text>
+            <Text style={{ fontSize: 14, color: colors.gray[500] }}>
+              Tap + to add your first patient
             </Text>
           </View>
         }

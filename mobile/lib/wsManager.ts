@@ -92,15 +92,19 @@ class WebSocketManager {
   }
 
   /** Subscribe to incoming WS events. Returns an unsubscribe function. */
-  subscribe(listener: Listener) {
+  subscribe(listener: Listener): () => void {
     this.listeners.add(listener);
-    return () => this.listeners.delete(listener);
+    return () => {
+      this.listeners.delete(listener);
+    };
   }
 
   /** Subscribe to connection state changes. Returns an unsubscribe function. */
-  onConnectionChange(listener: ConnectionListener) {
+  onConnectionChange(listener: ConnectionListener): () => void {
     this.connectionListeners.add(listener);
-    return () => this.connectionListeners.delete(listener);
+    return () => {
+      this.connectionListeners.delete(listener);
+    };
   }
 
   get connected() {

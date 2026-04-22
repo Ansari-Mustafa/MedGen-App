@@ -11,13 +11,10 @@ export default function ProfileScreen() {
   const { user } = useAuthStore();
 
   const profileRows = [
-    { label: 'Title', value: user?.title ?? '-' },
-    { label: 'First Name', value: user?.first_name ?? '-' },
-    { label: 'Last Name', value: user?.last_name ?? '-' },
+    { label: 'Full Name', value: user?.full_name ?? '-' },
     { label: 'Email', value: user?.email ?? '-' },
     { label: 'Phone', value: user?.phone ?? '-' },
-    { label: 'Specialty', value: user?.specialty ?? '-' },
-    { label: 'License Number', value: user?.license_number ?? '-' },
+    { label: 'Role', value: user?.role ?? '-' },
   ];
 
   return (
@@ -41,13 +38,9 @@ export default function ProfileScreen() {
 
       <ScrollView contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 32 }}>
         <View style={{ alignItems: 'center', paddingVertical: 20, gap: 10 }}>
-          <Avatar
-            firstName={user?.first_name ?? 'D'}
-            lastName={user?.last_name ?? 'S'}
-            size={80}
-          />
+          <Avatar name={user?.full_name ?? 'Doctor'} size={80} />
           <Text style={{ fontSize: 22, fontWeight: '700', color: colors.gray[900] }}>
-            {user?.title} {user?.first_name} {user?.last_name}
+            {user?.full_name ?? '-'}
           </Text>
           <Text style={{ fontSize: 14, color: colors.gray[500] }}>{user?.email}</Text>
         </View>

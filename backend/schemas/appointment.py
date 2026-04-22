@@ -23,6 +23,7 @@ class AppointmentOut(OrmBase):
     id: uuid.UUID
     patient_id: uuid.UUID
     doctor_id: uuid.UUID
+    patient_name: Optional[str] = None
     scheduled_at: Optional[datetime]
     status: str
     type: Optional[str]

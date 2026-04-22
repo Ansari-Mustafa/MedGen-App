@@ -1,47 +1,60 @@
-import { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, ScrollView, Pressable } from 'react-native';
+import { View, Text, SafeAreaView, ScrollView, Pressable, Alert } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { ArrowLeft } from 'lucide-react-native';
-import { patientService } from '@/services';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { ArrowLeft, Pencil } from 'lucide-react-native';
+import { getPatient, deletePatient } from '@/services/api/patients';
 import { Card } from '@/components/ui/Card';
 import { Avatar } from '@/components/ui/Avatar';
-import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { colors } from '@/constants/theme';
 import { formatDate } from '@/utils/formatting';
+import { extractApiError } from '@/utils/errors';
 import type { Patient } from '@/types/models';
 
 export default function PatientDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
-  const [patient, setPatient] = useState<Patient | null>(null);
-  const [loading, setLoading] = useState(true);
+  const qc = useQueryClient();
 
-  useEffect(() => {
-    if (id) {
-      patientService.getPatient(Number(id)).then((data) => {
-        setPatient(data);
-        setLoading(false);
-      });
-    }
-  }, [id]);
+  const { data: patient, isLoading } = useQuery<Patient>({
+    queryKey: ['patient', id],
+    queryFn: () => getPatient(id!),
+    enabled: !!id,
+  });
 
-  if (loading || !patient) return <LoadingSpinner fullScreen />;
+  const deleteMutation = useMutation({
+    mutationFn: () => deletePatient(id!),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['patients'] });
+      router.back();
+    },
+    onError: (err) => Alert.alert('Error', extractApiError(err)),
+  });
+
+  if (isLoading || !patient) return <LoadingSpinner fullScreen />;
 
   const infoRows = [
-    { label: 'Date of Birth', value: formatDate(patient.date_of_birth) },
-    { label: 'Gender', value: patient.gender ?? '-' },
+    { label: 'Date of Birth', value: formatDate(patient.dob) },
     { label: 'Email', value: patient.email ?? '-' },
     { label: 'Phone', value: patient.phone ?? '-' },
     { label: 'Address', value: patient.address ?? '-' },
-    { label: 'NHS Number', value: patient.nhs_number ?? '-' },
-    { label: 'MRN', value: patient.medical_record_number ?? '-' },
-    { label: 'Emergency Contact', value: patient.emergency_contact_name ?? '-' },
+    { label: 'NI Number', value: patient.nino ?? '-' },
   ];
+
+  const confirmDelete = () => {
+    Alert.alert(
+      'Delete patient?',
+      `This will permanently remove ${patient.full_name}.`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Delete', style: 'destructive', onPress: () => deleteMutation.mutate() },
+      ],
+    );
+  };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.gray[50] }}>
-      {/* Header */}
       <View
         style={{
           flexDirection: 'row',
@@ -57,21 +70,24 @@ export default function PatientDetailScreen() {
         <Text style={{ flex: 1, fontSize: 18, fontWeight: '700', color: colors.gray[900] }}>
           Patient Details
         </Text>
+        <Pressable
+          onPress={() => router.push(`/(tabs)/more/patients/${id}/edit` as never)}
+          hitSlop={12}
+        >
+          <Pencil size={20} color={colors.primary[800]} strokeWidth={2} />
+        </Pressable>
       </View>
 
       <ScrollView contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 32 }}>
-        {/* Profile card */}
         <Card variant="elevated" padding={20}>
           <View style={{ alignItems: 'center', gap: 10 }}>
-            <Avatar firstName={patient.first_name} lastName={patient.last_name} size={64} />
+            <Avatar name={patient.full_name} size={64} />
             <Text style={{ fontSize: 22, fontWeight: '700', color: colors.gray[900] }}>
-              {patient.first_name} {patient.last_name}
+              {patient.full_name}
             </Text>
-            <Badge label={patient.is_active ? 'Active' : 'Inactive'} variant={patient.is_active ? 'success' : 'error'} />
           </View>
         </Card>
 
-        {/* Info rows */}
         <Text
           style={{
             fontSize: 13,
@@ -109,7 +125,6 @@ export default function PatientDetailScreen() {
           ))}
         </Card>
 
-        {/* Notes */}
         {patient.notes && (
           <>
             <Text
@@ -132,6 +147,16 @@ export default function PatientDetailScreen() {
             </Card>
           </>
         )}
+
+        <View style={{ marginTop: 28 }}>
+          <Button
+            title={deleteMutation.isPending ? 'Deleting…' : 'Delete Patient'}
+            onPress={confirmDelete}
+            variant="outline"
+            fullWidth
+            loading={deleteMutation.isPending}
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

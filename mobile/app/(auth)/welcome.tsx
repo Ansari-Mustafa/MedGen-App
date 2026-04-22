@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router';
 import { Mic, FileText, Sparkles, Download } from 'lucide-react-native';
 import { Button } from '@/components/ui/Button';
 import { colors } from '@/constants/theme';
+import { useAuthStore } from '@/stores/authStore';
 
 const features = [
   { label: 'Record', Icon: Mic },
@@ -13,6 +14,7 @@ const features = [
 
 export default function WelcomeScreen() {
   const router = useRouter();
+  const error = useAuthStore((s) => s.error);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
@@ -91,6 +93,20 @@ export default function WelcomeScreen() {
 
         {/* Action buttons */}
         <View style={{ gap: 12 }}>
+          {error && (
+            <View
+              style={{
+                backgroundColor: colors.error.light,
+                paddingVertical: 10,
+                paddingHorizontal: 14,
+                borderRadius: 10,
+              }}
+            >
+              <Text style={{ color: colors.error.DEFAULT, fontSize: 13, textAlign: 'center' }}>
+                {error}
+              </Text>
+            </View>
+          )}
           <Button
             title="Sign In"
             onPress={() => router.push('/(auth)/login')}

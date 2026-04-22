@@ -37,7 +37,7 @@ class Settings(BaseSettings):
     # App
     app_name: str = "MedGen API"
     debug: bool = False
-    cors_origins: list[str] = ["http://localhost:8081", "exp://localhost:8081"]
+    cors_origins: list[str] = ["*"]
 
     # Public-facing URL (used by mobile to form WebSocket / API URLs)
     # Local dev: set to your ngrok HTTPS URL, e.g. https://abc123.ngrok.io

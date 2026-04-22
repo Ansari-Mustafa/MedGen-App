@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import * as authApi from '@/services/api/auth';
+import { supabase } from '@/lib/supabase';
+import { api } from '@/lib/api';
 
 export interface Profile {
   id: string;
@@ -36,7 +38,7 @@ interface AuthState {
 
   login: (data: LoginInput) => Promise<void>;
   signup: (data: SignupInput) => Promise<void>;
-  logout: () => Promise<void>;
+  logout: (reason?: string) => Promise<void>;
   loadStoredAuth: () => Promise<void>;
   updateProfile: (data: Partial<Profile>) => Promise<void>;
   clearError: () => void;
@@ -70,21 +72,40 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
   },
 
-  logout: async () => {
+  logout: async (reason) => {
     await authApi.logout();
-    set({ user: null, isAuthenticated: false, isLoading: false, error: null });
+    set({ user: null, isAuthenticated: false, isLoading: false, error: reason ?? null });
   },
 
   loadStoredAuth: async () => {
+    // Strict: if we can't verify the session against the backend, the user
+    // must re-authenticate. Reset state at the top so stale values from
+    // Metro fast-refresh can never leak an authenticated screen.
+    set({ isLoading: true, isAuthenticated: false, user: null });
     try {
-      const session = await authApi.getStoredSession();
-      if (session) {
-        set({ user: session.user as Profile, isAuthenticated: true, isLoading: false });
-      } else {
-        set({ isLoading: false });
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) {
+        set({ isLoading: false, isAuthenticated: false, user: null });
+        return;
+      }
+      try {
+        const profile = await api.get('/me').then((r) => r.data);
+        set({ user: profile as Profile, isAuthenticated: true, isLoading: false, error: null });
+      } catch (err: any) {
+        await supabase.auth.signOut();
+        const status = err?.response?.status;
+        const errorMessage = status
+          ? 'Session expired. Please sign in again.'
+          : 'Could not reach server. Please sign in again.';
+        set({
+          user: null,
+          isAuthenticated: false,
+          isLoading: false,
+          error: errorMessage,
+        });
       }
     } catch {
-      set({ isLoading: false });
+      set({ isLoading: false, isAuthenticated: false, user: null });
     }
   },
 

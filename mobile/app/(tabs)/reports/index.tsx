@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, FlatList, Pressable } from 'react-native';
+import { useState } from 'react';
+import { View, Text, SafeAreaView, FlatList, Pressable, RefreshControl } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useQuery } from '@tanstack/react-query';
 import { FileText } from 'lucide-react-native';
-import { reportService } from '@/services';
+import { getReports } from '@/services/api/reports';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Avatar } from '@/components/ui/Avatar';
@@ -10,44 +11,44 @@ import { SearchBar } from '@/components/ui/SearchBar';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { colors } from '@/constants/theme';
 import { formatDate } from '@/utils/formatting';
-import type { MedicalReport } from '@/types/models';
+import type { MedicalReport, ReportStatus } from '@/types/models';
 
-const FILTERS = ['All', 'Generated', 'Approved', 'Exported'] as const;
+const FILTERS = ['All', 'Pending', 'Ready', 'Approved'] as const;
 
-function statusToBadgeVariant(status: string) {
+function statusToBadgeVariant(status: ReportStatus) {
   switch (status) {
     case 'approved': return 'success' as const;
-    case 'exported': return 'info' as const;
-    case 'generating': return 'warning' as const;
-    case 'generated': return 'default' as const;
+    case 'ready': return 'info' as const;
+    case 'generating':
+    case 'pending': return 'warning' as const;
+    case 'error': return 'error' as const;
     default: return 'default' as const;
   }
 }
 
+function reportTitle(r: MedicalReport): string {
+  const name = r.patient_name ?? 'Report';
+  return `${name} — ${formatDate(r.created_at)}`;
+}
+
 export default function ReportsListScreen() {
   const router = useRouter();
-  const [reports, setReports] = useState<MedicalReport[]>([]);
-  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState<string>('All');
+  const [filter, setFilter] = useState<(typeof FILTERS)[number]>('All');
 
-  useEffect(() => {
-    reportService.getReports().then((data) => {
-      setReports(data);
-      setLoading(false);
-    });
-  }, []);
+  const { data: reports = [], isLoading, refetch, isRefetching } = useQuery<MedicalReport[]>({
+    queryKey: ['reports'],
+    queryFn: getReports,
+  });
 
   const filtered = reports.filter((r) => {
-    const matchesSearch =
-      r.title.toLowerCase().includes(search.toLowerCase()) ||
-      r.patient_name.toLowerCase().includes(search.toLowerCase());
-    const matchesFilter =
-      filter === 'All' || r.status.toLowerCase() === filter.toLowerCase();
+    const name = (r.patient_name ?? '').toLowerCase();
+    const matchesSearch = name.includes(search.toLowerCase());
+    const matchesFilter = filter === 'All' || r.status.toLowerCase() === filter.toLowerCase();
     return matchesSearch && matchesFilter;
   });
 
-  if (loading) return <LoadingSpinner fullScreen />;
+  if (isLoading) return <LoadingSpinner fullScreen />;
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.gray[50] }}>
@@ -65,7 +66,6 @@ export default function ReportsListScreen() {
         </Text>
         <SearchBar value={search} onChangeText={setSearch} placeholder="Search reports..." />
 
-        {/* Filter chips */}
         <View style={{ flexDirection: 'row', gap: 8, marginTop: 12 }}>
           {FILTERS.map((f) => (
             <Pressable
@@ -94,28 +94,25 @@ export default function ReportsListScreen() {
 
       <FlatList
         data={filtered}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 24, gap: 10 }}
+        refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}
         renderItem={({ item }) => (
           <Card variant="elevated" padding={14}>
             <Pressable
               onPress={() => router.push(`/(tabs)/reports/${item.id}` as never)}
               style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}
             >
-              <Avatar
-                firstName={item.patient_name.split(' ')[0]}
-                lastName={item.patient_name.split(' ')[1] ?? ''}
-                size={44}
-              />
+              <Avatar name={item.patient_name} size={44} />
               <View style={{ flex: 1 }}>
                 <Text
                   style={{ fontSize: 15, fontWeight: '600', color: colors.gray[900] }}
                   numberOfLines={1}
                 >
-                  {item.title}
+                  {reportTitle(item)}
                 </Text>
                 <Text style={{ fontSize: 13, color: colors.gray[500], marginTop: 2 }}>
-                  {item.patient_name} · {formatDate(item.report_date)}
+                  {item.patient_name ?? 'Unknown patient'}
                 </Text>
               </View>
               <Badge label={item.status} variant={statusToBadgeVariant(item.status)} />
@@ -128,7 +125,7 @@ export default function ReportsListScreen() {
               <FileText size={28} color={colors.gray[500]} strokeWidth={1.5} />
             </View>
             <Text style={{ fontSize: 16, fontWeight: '600', color: colors.gray[700] }}>
-              No reports found
+              No reports yet
             </Text>
             <Text style={{ fontSize: 14, color: colors.gray[500] }}>
               Record a session to generate your first report

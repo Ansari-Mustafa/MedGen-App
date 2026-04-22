@@ -4,6 +4,7 @@ Falls back to HS256 shared secret for older Supabase projects.
 JWKS keys are cached in-process and refreshed every hour.
 """
 import time
+import uuid
 import jwt
 from jwt import PyJWKClient
 
@@ -35,7 +36,6 @@ def _get_jwks_client() -> PyJWKClient:
 
 def _decode_token(token: str) -> dict:
     """Try JWKS (RS256/ES256) first; fall back to HS256 shared secret."""
-    # JWKS approach — recommended for all current Supabase projects
     if settings.supabase_url:
         try:
             signing_key = _get_jwks_client().get_signing_key_from_jwt(token)
@@ -48,7 +48,6 @@ def _decode_token(token: str) -> dict:
         except Exception:
             pass  # fall through to HS256 for older projects
 
-    # HS256 fallback for projects that haven't migrated to asymmetric keys
     if settings.supabase_jwt_secret:
         secret = settings.supabase_jwt_secret.strip('"')
         return jwt.decode(
@@ -65,7 +64,13 @@ async def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
     db: AsyncSession = Depends(get_db),
 ):
-    """Verify Supabase JWT and return the Profile ORM row."""
+    """Verify Supabase JWT and return the Profile ORM row.
+
+    If the Supabase user exists but no Profile row is present (e.g. user was
+    created via the Supabase dashboard, or /profiles/setup was never called),
+    auto-provision one from the JWT claims. This prevents stale auth states
+    where the mobile client has a valid session but the backend 404s on /me.
+    """
     try:
         payload = _decode_token(credentials.credentials)
     except Exception:
@@ -85,7 +90,20 @@ async def get_current_user(
     profile = result.scalar_one_or_none()
 
     if profile is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Profile not found")
+        email = payload.get("email", "") or ""
+        meta = payload.get("user_metadata") or {}
+        full_name = meta.get("full_name") or (email.split("@")[0] if email else "New User")
+        role = meta.get("role") or "doctor"
+
+        profile = Profile(
+            id=uuid.UUID(user_id),
+            role=role,
+            full_name=full_name,
+            email=email,
+        )
+        db.add(profile)
+        await db.commit()
+        await db.refresh(profile)
 
     return profile
 

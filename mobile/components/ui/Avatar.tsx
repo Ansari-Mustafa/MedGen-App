@@ -1,16 +1,16 @@
 import { View, Text } from 'react-native';
 import { getAvatarColor } from '@/constants/theme';
-import { getInitials } from '@/utils/formatting';
+import { getInitialsFromName } from '@/utils/formatting';
 
 interface AvatarProps {
-  firstName: string;
-  lastName: string;
+  name?: string | null;
   size?: number;
 }
 
-export function Avatar({ firstName, lastName, size = 44 }: AvatarProps) {
-  const bg = getAvatarColor(firstName);
-  const initials = getInitials(firstName, lastName);
+export function Avatar({ name, size = 44 }: AvatarProps) {
+  const display = name && name.trim().length > 0 ? name : '?';
+  const bg = getAvatarColor(display);
+  const initials = getInitialsFromName(display);
   const fontSize = size * 0.38;
 
   return (

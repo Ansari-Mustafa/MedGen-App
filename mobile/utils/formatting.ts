@@ -1,25 +1,32 @@
+const pad2 = (n: number) => n.toString().padStart(2, '0');
+
 export function formatDate(dateString: string | null | undefined): string {
   if (!dateString) return '-';
   const date = new Date(dateString);
   if (Number.isNaN(date.getTime())) return '-';
-  return date.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
+  return `${pad2(date.getDate())}/${pad2(date.getMonth() + 1)}/${date.getFullYear()}`;
 }
 
 export function formatDateTime(dateString: string | null | undefined): string {
   if (!dateString) return '-';
   const date = new Date(dateString);
   if (Number.isNaN(date.getTime())) return '-';
-  return date.toLocaleString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  return `${pad2(date.getDate())}/${pad2(date.getMonth() + 1)}/${date.getFullYear()} ${pad2(date.getHours())}:${pad2(date.getMinutes())}`;
+}
+
+export function toISODateString(date: Date): string {
+  return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`;
+}
+
+export function parseISODate(value: string | null | undefined): Date | null {
+  if (!value) return null;
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (m) {
+    const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    return Number.isNaN(d.getTime()) ? null : d;
+  }
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? null : d;
 }
 
 export function formatTime(timeString: string): string {

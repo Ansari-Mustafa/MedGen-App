@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { PickerModal } from '@/components/ui/PickerModal';
+import { DateTimePickerField } from '@/components/ui/DateTimePickerField';
 import { getPatients } from '@/services/api/patients';
 import { colors } from '@/constants/theme';
 import type { Appointment, AppointmentCreate, AppointmentStatus, Patient } from '@/types/models';
@@ -28,8 +29,7 @@ const STATUS_OPTIONS: { id: AppointmentStatus; label: string }[] = [
 
 const createSchema = z.object({
   patient_id: z.string().uuid('Select a patient'),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Use YYYY-MM-DD').optional().or(z.literal('')),
-  time: z.string().regex(/^\d{2}:\d{2}$/, 'Use HH:MM').optional().or(z.literal('')),
+  scheduled_at: z.string().optional().or(z.literal('')),
   type: z.string().optional(),
   notes: z.string().optional(),
   status: z.enum(['scheduled', 'completed', 'cancelled']).optional(),
@@ -53,33 +53,31 @@ interface AppointmentFormProps {
   onSubmit: (values: AppointmentFormPayload) => void | Promise<void>;
 }
 
-function splitScheduledAt(iso: string | null | undefined): { date: string; time: string } {
-  if (!iso) return { date: '', time: '' };
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return { date: '', time: '' };
-  const date = d.toISOString().slice(0, 10);
-  const time = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-  return { date, time };
+function setDatePart(base: Date, picked: Date): Date {
+  const d = new Date(base);
+  d.setFullYear(picked.getFullYear(), picked.getMonth(), picked.getDate());
+  return d;
 }
 
-function combineDateTime(date: string, time: string): string | undefined {
-  if (!date) return undefined;
-  const t = time || '09:00';
-  // Interpret as local time; convert to ISO for backend.
-  const local = new Date(`${date}T${t}:00`);
-  if (Number.isNaN(local.getTime())) return undefined;
-  return local.toISOString();
+function setTimePart(base: Date, picked: Date): Date {
+  const d = new Date(base);
+  d.setHours(picked.getHours(), picked.getMinutes(), 0, 0);
+  return d;
 }
 
 export function AppointmentForm({ mode, initialValues, submitLabel, submitting, onSubmit }: AppointmentFormProps) {
-  const { date: initDate, time: initTime } = splitScheduledAt(initialValues?.scheduled_at);
+  const initialScheduled = initialValues?.scheduled_at
+    ? (() => {
+        const d = new Date(initialValues.scheduled_at as string);
+        return Number.isNaN(d.getTime()) ? '' : d.toISOString();
+      })()
+    : '';
 
   const { control, handleSubmit, formState: { errors }, watch, setValue } = useForm<FormValues>({
     resolver: zodResolver(createSchema),
     defaultValues: {
       patient_id: initialValues?.patient_id ?? '',
-      date: initDate,
-      time: initTime,
+      scheduled_at: initialScheduled,
       type: initialValues?.type ?? '',
       notes: initialValues?.notes ?? '',
       status: (initialValues?.status as AppointmentStatus | undefined) ?? 'scheduled',
@@ -103,10 +101,9 @@ export function AppointmentForm({ mode, initialValues, submitLabel, submitting, 
   const selectedPatient = patients.find((p) => p.id === patientId);
 
   const onValid = (values: FormValues) => {
-    const scheduled_at = combineDateTime(values.date ?? '', values.time ?? '');
     const payload: AppointmentFormPayload = {
       patient_id: values.patient_id,
-      ...(scheduled_at ? { scheduled_at } : {}),
+      ...(values.scheduled_at ? { scheduled_at: values.scheduled_at } : {}),
       ...(values.type ? { type: values.type } : {}),
       ...(values.notes ? { notes: values.notes } : {}),
       ...(values.status ? { status: values.status } : {}),
@@ -139,40 +136,45 @@ export function AppointmentForm({ mode, initialValues, submitLabel, submitting, 
         )}
       </View>
 
-      <View style={{ flexDirection: 'row', gap: 12 }}>
-        <View style={{ flex: 1 }}>
-          <Controller
-            control={control}
-            name="date"
-            render={({ field }) => (
-              <Input
-                label="Date"
-                placeholder="YYYY-MM-DD"
-                value={field.value ?? ''}
-                onChangeText={field.onChange}
-                error={errors.date?.message}
-                autoCapitalize="none"
-              />
-            )}
-          />
-        </View>
-        <View style={{ flex: 1 }}>
-          <Controller
-            control={control}
-            name="time"
-            render={({ field }) => (
-              <Input
-                label="Time"
-                placeholder="HH:MM"
-                value={field.value ?? ''}
-                onChangeText={field.onChange}
-                error={errors.time?.message}
-                autoCapitalize="none"
-              />
-            )}
-          />
-        </View>
-      </View>
+      <Controller
+        control={control}
+        name="scheduled_at"
+        render={({ field }) => {
+          const current = field.value ? new Date(field.value) : null;
+          const valid = current && !Number.isNaN(current.getTime()) ? current : null;
+          return (
+            <View style={{ flexDirection: 'row', gap: 12 }}>
+              <View style={{ flex: 1 }}>
+                <DateTimePickerField
+                  label="Date"
+                  mode="date"
+                  value={valid}
+                  onChange={(d) => {
+                    const base = valid ?? (() => {
+                      const n = new Date();
+                      n.setHours(9, 0, 0, 0);
+                      return n;
+                    })();
+                    field.onChange(setDatePart(base, d).toISOString());
+                  }}
+                  error={errors.scheduled_at?.message}
+                />
+              </View>
+              <View style={{ flex: 1 }}>
+                <DateTimePickerField
+                  label="Time"
+                  mode="time"
+                  value={valid}
+                  onChange={(t) => {
+                    const base = valid ?? new Date();
+                    field.onChange(setTimePart(base, t).toISOString());
+                  }}
+                />
+              </View>
+            </View>
+          );
+        }}
+      />
 
       {/* Type picker */}
       <View style={{ gap: 6 }}>

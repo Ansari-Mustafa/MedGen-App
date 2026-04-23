@@ -4,13 +4,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
+import { DateTimePickerField } from '@/components/ui/DateTimePickerField';
+import { parseISODate, toISODateString } from '@/utils/formatting';
 import type { Patient, PatientCreate } from '@/types/models';
 
 const schema = z.object({
   full_name: z.string().min(1, 'Name is required'),
   dob: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Use YYYY-MM-DD')
+    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date')
     .optional()
     .or(z.literal('')),
   email: z.string().email('Invalid email').optional().or(z.literal('')),
@@ -74,13 +76,13 @@ export function PatientForm({ initialValues, submitLabel, submitting, onSubmit }
         control={control}
         name="dob"
         render={({ field }) => (
-          <Input
+          <DateTimePickerField
             label="Date of Birth"
-            placeholder="YYYY-MM-DD"
-            value={field.value ?? ''}
-            onChangeText={field.onChange}
+            mode="date"
+            value={parseISODate(field.value)}
+            onChange={(d) => field.onChange(toISODateString(d))}
             error={errors.dob?.message}
-            autoCapitalize="none"
+            maximumDate={new Date()}
           />
         )}
       />

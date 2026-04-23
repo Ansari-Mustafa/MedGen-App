@@ -1,95 +1,105 @@
 {
   "filled": {
-    "appointment_date": "26th March 2026",
-    "appointment_length": null,
-    "appointment_venue": "Doctors Chambers",
-    "claimant_age": "60",
-    "diagnosis_and_prognosis": "The claimant sustained a left medial malleolus fracture requiring open reduction and internal fixation, and a right ankle fracture treated non-operatively in a walker boot. He additionally suffered crush injuries to both ankles and feet when a second vehicle ran over his lower limbs whilst he was on the ground. He subsequently developed a deep vein thrombosis in December 2024, which extended to his abdomen, requiring hospitalisation and anticoagulant therapy. The DVT has contributed to ongoing circulatory compromise and persistent swelling of the left lower limb. The claimant's right ankle currently exhibits moderate residual symptoms with intermittent flare-ups, reduced plantar flexion to approximately fifty percent of normal, and normal dorsiflexion. The left ankle remains moderate to severe in symptom severity, with significant persistent swelling, reduced range of motion in both plantar flexion and dorsiflexion, medial ankle pain, and shooting pains. The treating surgeon has advised that the claimant will have permanent stiffness in his ankles. It is the examining doctor's opinion that the right ankle is likely to recover to approximately eighty percent of normal function, whilst the left ankle is likely to achieve only approximately fifty percent of normal function. A course of physiotherapy over the next six months is recommended to strengthen the ankle musculature and improve symptoms, although full recovery is not anticipated. A referral to a psychologist is also recommended for the claimant's psychological symptoms. The stiffness in both ankles is expected to be permanent.",
-    "document_review_notes": null,
-    "effect_on_life": "The claimant reports significant adverse effects upon his daily life and activities as a consequence of his injuries. He has been unable to return to cycling and has abandoned his bicycle since the accident. He has been unable to attend to his allotment as he previously did. He has experienced considerable difficulty with shopping, being unable to walk to the shops and carry shopping, and has resorted to ordering deliveries. He reports that he has been largely housebound and socially isolated, having visited his eighty-four-year-old mother in Aylesbury only once in nearly two years, whereas he previously visited her every weekend. The claimant requires a size eleven shoe on the left foot due to persistent swelling, having previously been a size ten. He reports difficulty mobilising, particularly with prolonged walking, and describes episodes of disorientation at night when weight-bearing on his injured ankles.",
-    "effect_on_work": "The claimant was unemployed at the time of the index incident and was not working due to pre-existing rheumatism. There has therefore been no direct effect upon employment.",
-    "examination_date": "26th March 2026",
-    "examination_findings": [
-      "The left ankle was notably swollen compared to the right.",
-      "There was medial ankle tenderness on the left side with the claimant reporting shooting pains on the inner aspect of the left ankle.",
-      "A surgical scar was noted on the medial aspect of the left ankle from previous fracture fixation, though it was difficult to visualise, suggesting it had faded well.",
-      "Range of motion of the left ankle was reduced in both plantar flexion and dorsiflexion.",
-      "The left calf was swollen, likely secondary to previous deep vein thrombosis and resultant circulatory compromise.",
-      "The right ankle demonstrated residual swelling and medial joint line tenderness.",
-      "Dorsiflexion of the right ankle was normal.",
-      "Plantar flexion of the right ankle was reduced to approximately fifty percent of normal.",
-      "Overall, the right ankle demonstrated approximately fifty percent of normal range of motion in plantar flexion with preserved dorsiflexion."
-    ],
-    "immediate_medical_attendance": "An ambulance was called to the scene and the claimant was transported to Stepping Hill Hospital. The police also attended the scene. Upon arrival at Stepping Hill Hospital, the claimant was assessed through the Accident and Emergency department and was admitted as an inpatient. After approximately two days, he underwent surgical fixation of his left medial malleolus fracture, involving insertion of metalwork (pin/screw fixation). The right ankle fracture was treated non-operatively with a walker boot.",
-    "incident_date": "28th August 2024",
-    "incident_description": "The claimant was riding a pushbike and was stationary at traffic lights. When the lights turned green, the claimant proceeded through the junction. A vehicle travelling from the opposite direction turned across the traffic at the junction and collided with the claimant, knocking him from his bicycle. The third-party driver exited his vehicle and behaved aggressively, blaming the claimant for the collision. Bystanders intervened and told the driver to move away. Whilst the claimant remained on the ground, having been advised by bystanders not to move, a second vehicle came around the junction and ran over both of the claimant's feet and ankles. The second vehicle failed to stop and left the scene. The police subsequently confirmed they had identified the first driver but were unable to trace the second vehicle despite the claimant reporting the presence of cameras at the junction.",
-    "instructing_agency": "Canova Medical",
-    "instructing_solicitor": null,
-    "is_soft_tissue_case": "No",
-    "is_vehicle_occupant": "No",
-    "living_arrangements": "The claimant resides in a ground floor flat. There was no change to his living arrangements as a result of the incident.",
-    "medical_history": "The claimant reports a history of osteoarthritis and rheumatoid arthritis, for which he takes codeine phosphate. He was not working at the time of the incident due to his rheumatism and associated difficulties.",
-    "other_id": "Utility bill (water bill)",
-    "past_accidents": null,
-    "patient_address_city": "Stockport",
-    "patient_address_line1": "8 Old Hall Drive",
-    "patient_dob": "14th August 1965",
-    "patient_name": "Edward Hand",
-    "patient_occupation": "Unemployed",
-    "patient_postcode": "SK2 5TX",
-    "photo_id_confirmation": "Identity confirmed by means of birth certificate and utility bill (water bill)",
-    "photo_id_type": "Birth certificate",
+    "patient_name": "Nicola Jones",
+    "patient_dob": "24/12/1971",
+    "patient_address_line1": "7 Squires Close, Haydock",
+    "patient_address_city": "St. Helens",
+    "patient_postcode": "WA11 0WB",
+    "patient_occupation": "Senior carer at a residential dementia unit (private healthcare)",
+    "incident_date": "04/12/2023",
+    "incident_description": "The claimant was the driver of a Range Rover, travelling at approximately ten miles per hour as she approached a roundabout in Scotland. Another vehicle collided with the rear of her vehicle at speed, with the front of the other vehicle going partially underneath the claimant's car owing to its higher ride height. The claimant was jolted forward upon impact. The airbags did not deploy. Following the collision, the claimant was unable to drive her vehicle and a bystander moved it for her. The other driver initially left the scene but was subsequently located by police at a nearby retail park.",
+    "is_vehicle_occupant": "Yes",
+    "seatbelt_worn": "Yes",
+    "vehicle_has_seatbelts": "Yes",
+    "seatbelt_exemption": "Not applicable",
+    "immediate_medical_attendance": "The claimant did not attend hospital immediately following the incident. The police at the scene noted that the claimant was walking abnormally and offered to take her to hospital; however, the claimant declined as she had her grandson with her. She took a taxi back to her daughter's residence in Scotland.",
+    "subsequent_medical_attendance": "The claimant attended her GP approximately two days after the incident, upon returning home from Scotland. The GP advised that the insurance company should manage her treatment. The claimant returned to her GP the following day, where a physiotherapist examined her and similarly recommended that she await treatment arranged through her insurance. The claimant subsequently underwent ten weeks of physiotherapy and acupuncture, arranged through her insurance provider. She also took ibuprofen and paracetamol for the initial few days following the incident.",
     "physical_symptoms": [
-      "The claimant sustained a left medial malleolus fracture, described as shattered, which required surgical fixation with metalwork insertion.",
-      "The claimant sustained a right ankle fracture treated non-operatively in a walker boot for approximately six to eight weeks.",
-      "Both ankles and feet suffered crush injuries when a second vehicle ran over the claimant's lower limbs whilst he was on the ground.",
-      "On the day of the incident, the claimant describes the pain in both ankles as severe.",
-      "The claimant currently reports moderate to severe symptoms in the left ankle, with persistent swelling, shooting pains on the medial aspect, reduced range of motion, and itching.",
-      "The claimant currently reports moderate symptoms in the right ankle, with intermittent flare-ups of pain depending on the amount of weight-bearing activity.",
-      "The claimant's left foot remains persistently swollen, requiring him to wear a size eleven shoe on that foot, having previously been a size ten.",
-      "The claimant developed a deep vein thrombosis in December 2024, which extended to his abdomen, requiring hospitalisation and treatment with anticoagulant medication.",
-      "The claimant's left calf remains swollen, likely as a consequence of post-thrombotic syndrome following the DVT.",
-      "The claimant experiences nocturnal pain in his left ankle which can disturb his sleep and cause difficulty with mobilisation at night.",
-      "The claimant was initially mobilising with a walking frame as he was unable to manage crutches, and was largely housebound for a significant period following the incident."
+      "Neck pain: Onset was practically immediate on the day of the incident. Initially described as mild in severity with associated stiffness. Currently largely resolved to normal but with intermittent exacerbations upon sudden movement.",
+      "Lower back pain: Onset on the day of the incident. Initially described as moderate in severity with stiffness. Currently largely resolved to normal but with intermittent twinges in the midline lumbar region. The claimant has been using kinesiology tape for support.",
+      "Left shoulder pain: Onset on the day of the incident. Initially described as mild in severity. Currently largely resolved but with intermittent twinges, particularly on turning movements.",
+      "Left arm pain: Onset on the day of the incident. Initially described as moderate in severity. Currently resolved to normal.",
+      "Bilateral hand and thumb pain: Onset the day after the incident. Initially described as moderate in severity with a bruised sensation. The right hand has resolved. The left thumb remains symptomatic with soreness along the extensor pollicis longus (EPL) tendon, suggestive of possible tendonitis."
     ],
-    "pre_existing_conditions": "The claimant has a pre-existing history of osteoarthritis and rheumatoid arthritis, for which he was prescribed codeine phosphate. He was deemed unfit for work prior to the index incident on account of these conditions.",
-    "psychological_symptoms": "The claimant reports experiencing nightmares related to the incident, particularly regarding the second vehicle running over his legs. He describes the incident as a near-death experience, recalling hearing the impact of the car running over his lower limbs. He reports a loss of confidence in cycling and has not returned to cycling since the incident. He describes social withdrawal and a reluctance to leave his home, stating that he has largely stayed indoors since the incident. He reports a loss of motivation, describing an inability to be bothered to visit his elderly mother. A referral to a psychologist has been recommended.",
-    "rehabilitative_treatment": "The claimant was seen by a physiotherapist prior to discharge from hospital and was provided with a set of home exercises. However, he was unable to attend follow-up physiotherapy appointments due to his mobility difficulties. He attempted the exercises at home but found that performing them on one night would result in an exacerbation of symptoms preventing him from repeating them the following night. It is recommended that the claimant undergo a course of hands-on physiotherapy over the next six months to strengthen the ankle musculature and improve his range of motion and symptoms. A referral to a psychologist has also been recommended to address the claimant's psychological symptoms.",
-    "report_date": "26th March 2026",
-    "seatbelt_exemption": null,
-    "seatbelt_worn": null,
-    "vehicle_has_seatbelts": null,
-    "signature_date": "26th March 2026",
-    "subsequent_medical_attendance": "The claimant was reviewed in the fracture clinic approximately six to eight weeks post-operatively, at which point the walker boots were removed. In December 2024, the claimant presented to his general practitioner with increasing swelling of the left lower limb. Blood tests were undertaken and the claimant was referred to hospital, where he was admitted and diagnosed with a deep vein thrombosis which had extended to his abdomen. He was treated with anticoagulant medication. More recently, approximately two weeks prior to this examination, the claimant attended again with recurrent swelling of the left calf. The DVT was excluded on this occasion; however, there was discussion regarding a possible referral to Wythenshawe Hospital for further investigation with advanced imaging."
+    "psychological_symptoms": "The claimant reports significant travel anxiety following the incident. She has been unable to drive back to Scotland since the accident and has not seen her grandson since December. She was unable to drive herself to the consultation and required someone else to drive her. She reports being nervous driving anywhere that is not local to her home and restricts her driving to the three-mile journey to and from work. She reports experiencing sweating whilst in the car. The examining doctor has recommended a referral to a psychologist for further assessment and treatment.",
+    "pre_existing_conditions": "The claimant has a past medical history of chronic kidney disease stage four, with a current glomerular filtration rate of approximately twenty percent. She underwent a left nephrectomy approximately fifteen years ago following a renal tumour, and the remaining kidney has deteriorated over time. She is currently on the transplant waiting list and is under regular review. No other relevant past medical history was reported.",
+    "medical_history": "Chronic kidney disease stage four. Left nephrectomy approximately fifteen years ago secondary to a renal tumour. Currently on the renal transplant waiting list and under regular review.",
+    "past_accidents": "The claimant reported that she has never previously been involved in a road traffic accident.",
+    "living_arrangements": "The claimant reports no change to her living arrangements as a result of the incident. She continues to reside in the same property and sleep in the same bed.",
+    "effect_on_work": "The claimant was placed on light duties at work for just over two weeks following the incident, during which time she did not undertake any lifting. She continued to carry out medication administration duties during this period. She subsequently returned to her normal duties on a gradual basis.",
+    "effect_on_life": "The claimant reports a significant impact upon her family life. She has been unable to drive to Scotland to visit her daughter and grandson since the incident and has consequently missed family occasions, including her daughter's and son's birthdays. She reports being unable to drive anywhere beyond her local area, restricting her driving to the three-mile commute to and from work. She required someone else to drive her to the medico-legal consultation.",
+    "examination_findings": [
+      "Cervical spine: Flexion, extension, and rotation were assessed. The claimant demonstrated some stiffness on forward flexion of the neck. Lateral rotation was achievable but with reported twinges.",
+      "Left shoulder: Range of movement assessed including abduction and adduction. Movements were noted to be slightly stiff.",
+      "Left arm: Movements assessed and found to be satisfactory.",
+      "Lumbar spine: Tenderness noted on palpation in the midline of the lower back. The claimant was apprehensive regarding flexion and extension owing to fear of pain recurrence, with associated stiffness noted.",
+      "Hands: Bilateral hand movements were assessed and found to be satisfactory. The claimant reported soreness along the extensor pollicis longus tendon of the left thumb on movement, suggestive of possible tendonitis. Grip strength and thumb opposition appeared intact."
+    ],
+    "rehabilitative_treatment": "The examining doctor recommends further physiotherapy for the claimant's left shoulder stiffness and lower back stiffness. A referral to a psychologist is also recommended for assessment and treatment of the claimant's travel anxiety and driving-related psychological symptoms.",
+    "is_soft_tissue_case": "Yes",
+    "diagnosis_and_prognosis": "The claimant sustained soft tissue injuries to the neck, lower back, left shoulder, left arm, and bilateral hands (including thumbs) as a result of a rear-end road traffic collision on 04/12/2023. The neck pain was initially mild and has largely resolved, though the claimant experiences intermittent exacerbations on sudden movement. The lower back pain was initially moderate and has largely resolved, though intermittent twinges persist in the midline lumbar region with associated stiffness. The left shoulder pain was initially mild and has largely resolved, though intermittent twinges remain, and examination revealed some residual stiffness. The left arm pain was initially moderate and has fully resolved. The bilateral hand and thumb pain was initially moderate; the right hand has fully resolved, but the claimant continues to experience soreness in the left thumb along the EPL tendon, possibly consistent with tendonitis. The claimant also reports significant psychological symptoms, including travel anxiety, an inability to drive beyond her local area, and avoidance of driving to Scotland. Further physiotherapy is recommended for the residual left shoulder and lower back symptoms, and a psychology referral is recommended for the travel anxiety. With appropriate treatment, the remaining physical symptoms are expected to continue to improve. The psychological symptoms require specialist assessment to determine prognosis.",
+    "document_review_notes": null,
+    "claimant_age": "52",
+    "photo_id_type": null,
+    "photo_id_confirmation": null,
+    "other_id": null,
+    "appointment_date": null,
+    "appointment_length": null,
+    "appointment_venue": null,
+    "examination_date": null,
+    "report_date": null,
+    "signature_date": null,
+    "instructing_agency": null,
+    "instructing_solicitor": null
   },
   "unfilled": [
     {
-      "placeholder": "appointment_length",
-      "reason": "The duration of the consultation was not stated or recorded in the transcript."
+      "placeholder": "document_review_notes",
+      "reason": "No documents or medical records were discussed as having been reviewed during the consultation."
     },
     {
-      "placeholder": "document_review_notes",
-      "reason": "No medical records or documents were reviewed or discussed during the consultation."
+      "placeholder": "photo_id_type",
+      "reason": "The type of photographic identification presented by the claimant was not mentioned in the transcript."
+    },
+    {
+      "placeholder": "photo_id_confirmation",
+      "reason": "No confirmation of photographic identification was discussed in the transcript."
+    },
+    {
+      "placeholder": "other_id",
+      "reason": "No other form of identification was mentioned in the transcript."
+    },
+    {
+      "placeholder": "appointment_date",
+      "reason": "The date of the consultation was not stated in the transcript."
+    },
+    {
+      "placeholder": "appointment_length",
+      "reason": "The duration of the consultation was not stated in the transcript."
+    },
+    {
+      "placeholder": "appointment_venue",
+      "reason": "The venue of the consultation was not stated in the transcript."
+    },
+    {
+      "placeholder": "examination_date",
+      "reason": "The date of the examination was not explicitly stated in the transcript."
+    },
+    {
+      "placeholder": "report_date",
+      "reason": "The date of the report was not stated in the transcript."
+    },
+    {
+      "placeholder": "signature_date",
+      "reason": "The signature date was not stated in the transcript."
+    },
+    {
+      "placeholder": "instructing_agency",
+      "reason": "The instructing agency was not mentioned in the transcript."
     },
     {
       "placeholder": "instructing_solicitor",
-      "reason": "No instructing solicitor was identified in the transcript; only the instructing agency (Canova Medical) was mentioned."
-    },
-    {
-      "placeholder": "past_accidents",
-      "reason": "The claimant was not asked about, and did not volunteer information regarding, any previous accidents or injuries unrelated to the index incident."
-    },
-    {
-      "placeholder": "seatbelt_exemption",
-      "reason": "The claimant was a cyclist and not a vehicle occupant; seatbelt exemption is not applicable."
-    },
-    {
-      "placeholder": "seatbelt_worn",
-      "reason": "The claimant was a cyclist and not a vehicle occupant; seatbelt use is not applicable."
-    },
-    {
-      "placeholder": "vehicle_has_seatbelts",
-      "reason": "The claimant was a cyclist and not a vehicle occupant; this field is not applicable."
+      "reason": "The instructing solicitor was not mentioned in the transcript."
     }
   ]
 }

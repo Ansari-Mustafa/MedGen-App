@@ -1,91 +1,73 @@
 {
   "filled": {
-    "appointment_date": null,
+    "appointment_date": "16/04/2026",
     "appointment_length": null,
-    "appointment_venue": "Carnarvon Medical",
-    "claimant_age": "61",
-    "diagnosis_and_prognosis": "The claimant has sustained soft tissue injuries to the cervical spine and left shoulder consistent with a whiplash-type mechanism of injury. The neck pain commenced the day following the index incident and was initially severe, now reported as moderate. The left shoulder pain similarly commenced the day following the incident, was initially severe, and remains moderate. Despite eight sessions of insurance-provided physiotherapy and ongoing private deep tissue massage therapy on a twice-monthly basis since 2024, the claimant's symptoms have not resolved. Examination reveals restricted range of motion in the cervical spine and left shoulder with tenderness over the left trapezius muscle and a trigger point at the trapezius insertion onto the occiput. An MRI scan of the cervical spine has been recommended to exclude nerve entrapment or structural injury, given the protracted duration of symptoms over approximately four years. A referral to a psychologist is also recommended for the claimant's anxiety and low mood. The case remains open pending the results of the recommended MRI scan. With appropriate hands-on physiotherapy and rehabilitation, further improvement is anticipated, although a definitive prognosis cannot be provided until imaging has been reviewed.",
-    "document_review_notes": null,
-    "effect_on_life": "The claimant reports that the injuries have had a significant impact upon her daily life. She is unable to sleep on her preferred left side due to pain in the left neck and shoulder, resulting in disturbed sleep. She has experienced reduced confidence whilst driving, particularly on narrow country lanes. At the time of the incident, the claimant was the sole driver for her household as her husband was undergoing spinal surgery and was unable to drive. She was required to continue driving despite her injuries to transport her husband to hospital appointments at Salford Royal and to attend work. She reports feeling that the weight of the world was upon her and that she was unable to prioritise her own health. She has been required to employ a gardener as she has a large garden and experiences limitation of movement in her left arm which restricts activities such as pruning hedges. She reports feeling emotionally overwhelmed during the period following the accident.",
-    "effect_on_work": "The claimant was employed as an administrator at a small family-run plumbing company at the time of the index incident. She took one day off work the day following the accident. She was unable to take any further time off or alter her working pattern due to the inflexibility of her employer. She had to arrange physiotherapy appointments before her 10:00 a.m. start time. The claimant was subsequently made redundant by that employer in approximately December 2023. She is no longer in that role.",
-    "examination_date": null,
+    "appointment_venue": "Video consultation",
+    "claimant_age": "33",
+    "diagnosis_and_prognosis": "The claimant sustained soft tissue injuries to the cervical spine (whiplash), bilateral shoulders, and the lumbar spine as a result of the index accident. He also sustained bilateral elbow bruising, transient paraesthesia predominantly affecting the right hand, and transient lightheadedness and dizziness. The cervical spine and shoulder symptoms were severe in the immediate aftermath, progressing from severe at their peak to mild at the date of examination. The lumbar spine symptoms remain moderate and are ongoing, with significant sleep disturbance. The elbow bruising and paraesthesia resolved within approximately two weeks of the accident. The claimant also reports travel anxiety and hypervigilance whilst driving, which he states he is managing without formal psychological intervention at present. With regard to prognosis, the cervical spine and shoulder injuries are expected to continue to improve and are approaching resolution. The lumbar spine injury is expected to improve gradually, with approximately fifty percent improvement anticipated within six months of the date of injury and further improvement over the following six months. However, given the physical nature of the claimant's occupation as a carpenter, it is anticipated that ten to twenty percent of residual lumbar symptoms may persist beyond twelve months from the date of injury. A minimum of three months of further physiotherapy and rehabilitation is recommended from the date of examination. If the lumbar spine symptoms fail to improve, an MRI scan of the lumbar spine may be indicated to exclude structural pathology. The psychological symptoms are expected to resolve in due course without formal intervention, though this will be kept under review.",
+    "document_review_notes": "The claimant reported that X-rays of the cervical spine and thoracolumbar spine were performed at John Radcliffe Hospital on 06/12/2025, along with an MRI scan of the spine. The treating doctor initially suspected a chip fracture in the back on X-ray imaging; however, the subsequent MRI scan did not confirm this finding. The consulting doctor noted the intention to review the imaging records provided to ascertain whether the MRI scan included coverage of the lumbar spine, and to determine whether further imaging of the lumbar spine is required.",
+    "effect_on_life": "The claimant reports significant disruption to his daily life and recreational activities as a consequence of the index accident. In the initial period following the accident, the claimant was unable to perform basic tasks such as putting on socks and trousers due to severe pain and restriction of movement in the lumbar spine. He was required to sleep downstairs for approximately three weeks owing to significant sleep disturbance caused by his lower back pain, which was also disturbing his partner's sleep. The claimant was unable to participate in his hobbies of football and running for approximately two months following the accident. He attempted to return to football in January 2026 but was unable to continue due to pain. The claimant reports that he has been unable to play with his children as he would wish, particularly his eight-year-old son, and this limitation remains ongoing at the date of examination. He was unable to drive for approximately one week following the accident. Sleep disturbance remains a significant ongoing issue, with the claimant waking every thirty to forty-five minutes due to lower back pain and being required to frequently change position throughout the night.",
+    "effect_on_work": "The claimant is employed as a carpenter. He was absent from work for two days immediately following the accident due to an inability to move his neck and the consequent inability to drive safely. Upon his return, the claimant was placed on light duties for approximately one month, during which period he was collected from home by colleagues as he was unable to drive his work van. He thereafter undertook a gradual phased return to his full duties. At the date of examination, the claimant has returned to full duties; however, he reports that his lower back pain is exacerbated by physically demanding days at work, noting noticeable aching when he has been particularly active with bending and lifting.",
+    "examination_date": "16/04/2026",
     "examination_findings": [
-      "Cervical spine flexion reduced to approximately 70% of normal.",
-      "Cervical spine extension reduced to approximately 50% of normal.",
-      "Cervical spine left rotation reduced to approximately 50% of normal, with pain reported over the left trapezius and top of the left shoulder.",
-      "Cervical spine right rotation reduced to approximately 80% of normal, with a pulling sensation over the left trapezius region.",
-      "Lateral flexion to the right is reduced; lateral flexion to the left is slightly reduced but marginally better than the right.",
-      "Tenderness and a trigger point identified over the left trapezius muscle at its insertion onto the occiput.",
-      "Left shoulder forward flexion limited to approximately 100 degrees.",
-      "Left shoulder abduction limited to approximately 95 degrees, with pain reported in the neck, over the deltoid, in the axillary region, and over the scapula beyond this range.",
-      "Left shoulder internal rotation appears within normal limits bilaterally, reaching approximately T4/T5 level.",
-      "Left shoulder external rotation reduced to approximately 70% of normal.",
-      "Subscapularis testing appeared satisfactory.",
-      "Tenderness identified over the left supraspinatus fossa.",
-      "Right shoulder examination unremarkable with full range of movement.",
-      "The claimant reports a constant dull ache over the left shoulder region."
+      "Cervical spine: Full range of movement observed on flexion, extension, left lateral rotation, and right lateral rotation. The claimant reported a pulling sensation and sharp pain radiating into the right shoulder region and below the right ear on flexion. No tenderness elicited on palpation of the posterior cervical spine.",
+      "Shoulders: Full range of movement observed bilaterally with no restriction. Tenderness elicited on palpation of the trapezius muscles bilaterally, worse on the right side than the left. Periscapular tenderness noted on the right.",
+      "Lumbar spine: Forward flexion reported as reduced, with the claimant describing an inability to bend forward to put on socks, requiring him to bring his foot up to his knee in a seated position. Rotation movements reported as achievable through full range but accompanied by pain in the midline lower back, just above the coccyx. No current neurological symptoms reported in the lower limbs at the date of examination."
     ],
-    "immediate_medical_attendance": "The claimant did not seek immediate medical attention following the incident. She drove herself home. She experienced shock and nausea on the evening of the incident and into the following day.",
-    "incident_date": "05/10/2022",
-    "incident_description": "The claimant was the driver of a motor vehicle travelling over the brow of a hill when four vehicles ahead of her stopped to allow a pedestrian with a dog to cross the road. The claimant brought her vehicle to a halt and engaged the handbrake. A third-party vehicle travelling downhill, having passed through traffic lights, failed to see the claimant's stationary vehicle and collided with the rear of her car at an estimated speed in excess of 30 miles per hour. The impact struck the rear of the claimant's vehicle towards the left side, causing the claimant's car to move to the left. Damage to the claimant's vehicle was predominantly on the left-hand side. The airbags did not deploy. The claimant was wearing her seatbelt at the time. She self-extricated from the vehicle. The third party was initially abusive and threatening towards the claimant but subsequently calmed down and later sent an apology. Both parties moved their vehicles into a nearby pub car park and exchanged details. There were no independent witnesses. The claimant was able to drive her vehicle home.",
-    "instructing_agency": "Premex",
-    "instructing_solicitor": "Carpenters Limited",
+    "immediate_medical_attendance": "The claimant did not seek immediate medical attention on the day of the accident on 05/12/2025. He experienced mild aching in the neck and shoulders that evening and took a hot bath. The following day, 06/12/2025, his symptoms worsened significantly, with a complete loss of movement in the neck and severe stiffness. By the evening of 06/12/2025, the claimant telephoned NHS 111. He was advised by an out-of-hours general practitioner to attend John Radcliffe Hospital. He attended the same-day unit at John Radcliffe Hospital, where X-rays of the cervical spine and back were performed, followed by an MRI scan of the spine. The MRI scan did not confirm a suspected chip fracture that had been queried on the X-ray. The claimant was prescribed codeine for pain relief and was diagnosed with whiplash injuries.",
+    "incident_date": "05/12/2025",
+    "incident_description": "The claimant reports that on 05/12/2025, at approximately half past three in the afternoon, he was driving his work van on a road situated between two roundabouts. He had come off a roundabout onto a road that transitions from a dual carriageway into a single lane before widening again into two lanes approaching the next roundabout, which is controlled by traffic lights. It was school-run time and traffic had built up. The claimant was stationary in queuing traffic when he felt a massive impact to the rear of his van. The force of the collision pushed his van into the vehicle in front, which was a taxi, and displaced his van to the right, into approximately the middle of the two lanes. The driver's airbag deployed and the cab filled with smoke. The claimant's eight-year-old son was a passenger in the vehicle. The claimant believes the third-party vehicle approached from behind and struck the rear right-hand side of his van at an angle, which would account for the deployment of the driver's airbag but not the passenger airbag. After exiting their vehicles, the claimant and the driver of the taxi observed the third-party vehicle slowly reversing before the driver accelerated and fled the scene. The claimant's van was written off, sustaining severe damage to the rear, with both rear doors caved in and the metalwork displaced over the rear tyre, as well as significant frontal damage from the secondary impact with the taxi. The claimant's partner attended the scene to collect his son.",
+    "instructing_agency": "Doctors Chambers",
+    "instructing_solicitor": null,
     "is_soft_tissue_case": "Yes",
     "is_vehicle_occupant": "Yes",
-    "living_arrangements": "The claimant's living arrangements did not change significantly following the incident. She continued to reside in her home and was able to manage the stairs. However, her sleep has been disturbed as she is unable to sleep on her preferred left side due to left-sided neck and shoulder pain, and she is required to sleep on her right side. She has had to employ a gardener to assist with the upkeep of her large garden due to the limitation of movement in her left arm.",
-    "medical_history": "The claimant reports a history of sleep apnoea for which she uses CPAP therapy. She takes no regular medication.",
-    "other_id": "3134448",
-    "past_accidents": "The claimant reports no previous road traffic accidents or relevant past accidents.",
-    "patient_address_city": "Sandbach",
-    "patient_address_line1": "39 Poole Lane, Wintley",
-    "patient_dob": "23/09/1963",
-    "patient_name": "Deborah Jones",
-    "patient_occupation": "Administrator",
-    "patient_postcode": "CW11 4RZ",
-    "photo_id_confirmation": "Yes",
-    "photo_id_type": "Password",
+    "living_arrangements": "The claimant lives with his partner and two children, aged eight and two.",
+    "medical_history": "The claimant reports no significant past medical history. He was fit and well prior to the index accident.",
+    "other_id": null,
+    "past_accidents": null,
+    "patient_address_city": "Bicester",
+    "patient_address_line1": "9 Barrett Road, Upper Heyford",
+    "patient_dob": "08/05/1992",
+    "patient_name": "Aaron",
+    "patient_occupation": "Carpenter",
+    "patient_postcode": "OX25 5BQ",
+    "photo_id_confirmation": "The claimant's identity was verified by means of a driving licence, and the details were confirmed to match those held on file.",
+    "photo_id_type": "Driving licence",
     "physical_symptoms": [
-      "Neck pain: commenced the day following the incident, initially severe in intensity, currently reported as moderate. The claimant describes pain over the left trapezius region and at its insertion onto the occiput.",
-      "Left shoulder pain: commenced the day following the incident, initially severe in intensity, currently reported as moderate. The claimant describes a constant dull ache over the left shoulder with pain over the supraspinatus fossa, deltoid, axillary region, and scapula on movement.",
-      "Restricted range of movement in the cervical spine, particularly on extension and left rotation.",
-      "Restricted range of movement in the left shoulder, particularly on forward flexion, abduction, and external rotation.",
-      "Disturbed sleep due to inability to lie on the preferred left side secondary to left-sided neck and shoulder pain.",
-      "Nausea experienced on the day of and the day following the incident."
+      "Neck pain: Onset on the day of the accident with mild aching, worsening to severe the following day with complete loss of movement. Currently mild with intermittent exacerbations, particularly on quick movements of the neck which produce a sharp pain radiating into the right shoulder.",
+      "Bilateral shoulder pain: Onset on the day of the accident with mild aching, worsening to severe the following day. Currently mild with residual stiffness and awareness of discomfort on movement. Right side worse than left.",
+      "Lower back pain: Onset the day after the accident, initially severe with significant restriction of forward flexion. Currently moderate and ongoing, with pain localised to the midline lower lumbar region just above the coccyx. The claimant reports difficulty bending forward to perform tasks such as putting on socks. Pain is exacerbated by physical activity and prolonged periods in any one position.",
+      "Sleep disturbance: Ongoing since the accident. The claimant wakes every thirty to forty-five minutes due to lower back pain and is required to change position frequently throughout the night.",
+      "Bilateral elbow bruising: Moderate severity at onset, believed to result from the claimant's elbows striking the seat on impact. Resolved within approximately two weeks.",
+      "Paraesthesia (tingling) in both hands, predominantly the right: Mild severity, onset within the first week following the accident. Resolved within approximately seven to ten days.",
+      "Lightheadedness and dizziness: Mild to moderate severity, onset within the first week following the accident. Resolved within approximately seven to ten days."
     ],
-    "pre_existing_conditions": "The claimant reports a pre-existing diagnosis of sleep apnoea for which she receives CPAP therapy. No other pre-existing conditions were reported. No pre-existing neck or shoulder complaints were disclosed.",
-    "psychological_symptoms": "The claimant reports experiencing anxiety and depression following the index incident. She describes initial shock and becoming upset, noting this was her first road traffic accident. She reports reduced confidence in driving, particularly on narrow country lanes. She describes feeling emotionally overwhelmed in the aftermath of the accident, as she was simultaneously caring for her husband who was undergoing spinal surgery, maintaining her employment, and managing her household. She felt unable to prioritise her own health and wellbeing during this period. A referral to a psychologist has been recommended.",
-    "rehabilitative_treatment": "The claimant received eight sessions of physiotherapy provided through the insurance company; however, she reports that four sessions consisted of discussion only, one was cancelled due to the therapist's illness, and the remaining sessions involved instruction on stretching exercises with a towel and use of a ball against a wall for shoulder mobilisation. The claimant did not consider this treatment adequate. She has subsequently been receiving private deep tissue massage therapy on a twice-monthly basis from 2024 to the present, funded at her own expense. The claimant has recently been referred by her GP to MCATS (Musculoskeletal Clinical Assessment and Treatment Service) and attended an appointment on the Tuesday prior to this consultation. A further referral for NHS physiotherapy has been recommended by MCATS. An MRI scan of the cervical spine has been recommended by the examining doctor to investigate the prolonged duration of symptoms. A referral to a psychologist has also been recommended.",
-    "report_date": null,
-    "seatbelt_exemption": "No",
+    "pre_existing_conditions": "The claimant reports no pre-existing medical conditions.",
+    "psychological_symptoms": "The claimant reports ongoing travel anxiety and hypervigilance whilst driving. He describes constantly checking his mirrors and being excessively aware of his surroundings. He reports feeling tense when stationary at roundabouts or in traffic and vehicles approach from behind, regardless of their speed. He also reports anxiety about his partner and children when they are travelling by car, even when he is not present in the vehicle. The claimant states that the psychological symptoms were more pronounced in the first two weeks following the accident and have improved to some extent since that time. He considers that he is managing these symptoms without formal psychological intervention at present.",
+    "rehabilitative_treatment": "The claimant underwent a course of eight sessions of physiotherapy, arranged through his insurer. The physiotherapy focused primarily on the lumbar spine, with the cervical and shoulder symptoms responding relatively quickly. The consulting doctor has recommended a further minimum of three months of physiotherapy and rehabilitation from the date of examination, including strengthening exercises and potentially hydrotherapy, to address the ongoing lumbar spine symptoms. An MRI scan of the lumbar spine may be requested if the existing imaging does not adequately cover the lumbar region or if symptoms fail to improve.",
+    "report_date": "16/04/2026",
+    "seatbelt_exemption": "Not applicable",
     "seatbelt_worn": "Yes",
-    "signature_date": null,
-    "subsequent_medical_attendance": "The claimant did not attend her GP in the immediate aftermath of the incident due to competing demands including caring for her husband and maintaining employment. She has recently attended her GP, who referred her to MCATS (Musculoskeletal Clinical Assessment and Treatment Service). She attended MCATS on the Tuesday prior to this consultation, where a referral for NHS physiotherapy was recommended. She has been receiving private deep tissue massage therapy on a twice-monthly basis since 2024.",
+    "signature_date": "16/04/2026",
+    "subsequent_medical_attendance": "The claimant attended John Radcliffe Hospital on 06/12/2025, the day after the accident, following a telephone consultation with an out-of-hours general practitioner via NHS 111. He underwent X-rays of the cervical spine and back and an MRI scan of the spine at the same-day unit. He was prescribed codeine for pain relief. Subsequently, the claimant underwent eight sessions of physiotherapy arranged through his insurer, which commenced shortly after the accident.",
     "vehicle_has_seatbelts": "Yes"
   },
   "unfilled": [
     {
-      "placeholder": "appointment_date",
-      "reason": "The specific date of the consultation is not stated in the transcript."
-    },
-    {
       "placeholder": "appointment_length",
-      "reason": "The duration of the appointment is not mentioned in the transcript."
+      "reason": "The duration of the consultation was not explicitly stated in the transcript."
     },
     {
-      "placeholder": "examination_date",
-      "reason": "The specific date of the examination is not stated in the transcript; it appears to have taken place during the consultation but no date is provided."
+      "placeholder": "instructing_solicitor",
+      "reason": "No instructing solicitor was mentioned in the transcript. The instructing agency was identified as Doctors Chambers and the claim is through the Motor Insurers Bureau, but no solicitor was named."
     },
     {
-      "placeholder": "document_review_notes",
-      "reason": "No documents reviewed or document review notes are discussed in the transcript."
+      "placeholder": "other_id",
+      "reason": "No additional identification document or reference number was mentioned in the transcript beyond the driving licence."
     },
     {
-      "placeholder": "report_date",
-      "reason": "The date of the report is not specified in the transcript."
-    },
-    {
-      "placeholder": "signature_date",
-      "reason": "The signature date is not mentioned in the transcript."
+      "placeholder": "past_accidents",
+      "reason": "The topic of previous accidents or claims was not discussed during the consultation."
     }
   ]
 }

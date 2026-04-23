@@ -15,6 +15,7 @@ import * as DocumentPicker from 'expo-document-picker';
 import { Mic, Upload, User, ChevronRight, Square, CheckCircle, AlertCircle, FileText } from 'lucide-react-native';
 import { useQuery } from '@tanstack/react-query';
 
+import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { colors } from '@/constants/theme';
@@ -261,6 +262,18 @@ export default function RecordScreen() {
     queryFn: getTemplates,
   });
 
+  // Auto-select the doctor's default template if none is picked yet.
+  useEffect(() => {
+    if (selectedTemplate || templates.length === 0) return;
+    const def = templates.find((t) => t.is_default && t.is_active);
+    if (def) setSelectedTemplate(def);
+  }, [templates, selectedTemplate]);
+
+  // Filter picker list to only active + fully onboarded templates.
+  const pickableTemplates = templates.filter(
+    (t) => t.is_active && t.onboarding_status === 'ready',
+  );
+
   const {
     state,
     duration,
@@ -420,9 +433,15 @@ export default function RecordScreen() {
               <FileText size={20} color={colors.primary[800]} strokeWidth={2} />
             </View>
             <View style={{ flex: 1 }}>
-              <Text style={{ fontSize: 15, fontWeight: '600', color: colors.gray[900] }}>
-                {selectedTemplate?.name ?? 'Select Template'}
-              </Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                <Text
+                  style={{ fontSize: 15, fontWeight: '600', color: colors.gray[900], flexShrink: 1 }}
+                  numberOfLines={1}
+                >
+                  {selectedTemplate?.name ?? 'Select Template'}
+                </Text>
+                {selectedTemplate?.is_default ? <Badge label="Default" variant="success" /> : null}
+              </View>
               <Text style={{ fontSize: 13, color: colors.gray[500] }}>
                 {selectedTemplate ? 'Report template selected' : 'Choose the report template'}
               </Text>
@@ -581,7 +600,7 @@ export default function RecordScreen() {
       <PickerModal<Template>
         visible={showTemplatePicker}
         title="Select Template"
-        items={templates}
+        items={pickableTemplates}
         loading={loadingTemplates}
         labelKey="name"
         onSelect={setSelectedTemplate}

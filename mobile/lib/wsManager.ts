@@ -10,7 +10,7 @@ const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:8000';
 const WS_BASE_URL = API_BASE_URL.replace(/^https/, 'wss').replace(/^http/, 'ws');
 
 export type WSEvent = {
-  type: 'pipeline_update' | 'notification' | 'connected';
+  type: 'pipeline_update' | 'template_onboarding' | 'notification' | 'connected';
   [key: string]: unknown;
 };
 

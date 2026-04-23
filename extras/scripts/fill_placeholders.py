@@ -42,6 +42,7 @@ LANGUAGE & STYLE RULES — follow these strictly:
 - Use precise, professional medical-legal language appropriate for a UK medicolegal report.
 - Write in the third person. Do NOT use the claimant's name anywhere in descriptive or narrative fields. Refer to them only as "the claimant" (e.g. "The claimant reports...", "The claimant attended..."). The only exception is identity fields such as patient_name, patient_dob, patient_address — those should contain the actual value from the transcript.
 - Do not use informal language, contractions, or colloquialisms.
+- ALWAYS format dates as DD/MM/YYYY (e.g. "05/04/2026", not "5th April 2026", "April 5, 2026", "2026-04-05", or any other variant). This applies to every date field and every date mentioned inside narrative text, including dates of birth, dates of accident, dates of examination, and any other date references.
 
 EXTRACTION RULES:
 1. Read the transcript carefully.
@@ -90,16 +91,17 @@ def fill_placeholders(placeholders: list[str], transcript: str) -> dict:
         text = text.split("\n", 1)[1] if "\n" in text else text
         text = text.rsplit("```", 1)[0]
 
-    # Fallback: extract raw JSON by finding the outermost { ... }
+    # Trim any prefix before the first `{` so raw_decode starts at the object.
     text = text.strip()
     if not text.startswith("{"):
         start = text.find("{")
-        end = text.rfind("}") + 1
-        if start != -1 and end > start:
-            text = text[start:end]
+        if start != -1:
+            text = text[start:]
 
+    # Use raw_decode so any trailing content after the JSON object is ignored.
     try:
-        return json.loads(text)
+        obj, _ = json.JSONDecoder().raw_decode(text)
+        return obj
     except json.JSONDecodeError as e:
         print(f"\nFailed to parse AI response as JSON: {e}")
         print(f"Stop reason: {response.stop_reason}")

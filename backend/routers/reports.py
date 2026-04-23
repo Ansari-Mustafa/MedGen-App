@@ -95,6 +95,10 @@ async def save_edits(
     updated = {**(report.filled_json or {}), **body.fields}
     report.filled_json = updated
     report.edits_json = body.fields
+    if report.status == "ready":
+        report.status = "edited"
+    await db.commit()
+    await db.refresh(report)
     return _serialize(report)
 
 
@@ -119,6 +123,8 @@ async def approve_report(
 
     report.status = "approved"
     report.approved_at = datetime.now(timezone.utc)
+    await db.commit()
+    await db.refresh(report)
     return _serialize(report)
 
 

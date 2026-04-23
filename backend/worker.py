@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from arq.connections import RedisSettings
 from backend.config import get_settings
 from backend.tasks.pipeline import run_pipeline
+from backend.tasks.onboard_template import onboard_template
 
 settings = get_settings()
 
@@ -33,7 +34,7 @@ async def shutdown(ctx):
 
 
 class WorkerSettings:
-    functions = [run_pipeline]
+    functions = [run_pipeline, onboard_template]
     on_startup = startup
     on_shutdown = shutdown
     redis_settings = RedisSettings.from_dsn(settings.redis_url)

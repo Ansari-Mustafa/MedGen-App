@@ -73,7 +73,7 @@ export interface AppointmentUpdate {
 
 // ── Medical Report ───────────────────────────────────────────
 
-export type ReportStatus = 'pending' | 'generating' | 'ready' | 'approved' | 'error';
+export type ReportStatus = 'pending' | 'generating' | 'ready' | 'edited' | 'approved' | 'error';
 
 export interface MedicalReport {
   id: string;
@@ -116,13 +116,65 @@ export interface DashboardStats {
 
 // ── Template ─────────────────────────────────────────────────
 
+export type OnboardingStatus = 'ready' | 'pending' | 'running' | 'error';
+
 export interface DoctorTemplate {
   id: string;
   doctor_id: string;
   name: string;
   docx_storage_path: string | null;
-  placeholders: string[] | null;
+  placeholders: Record<string, { type: string; description: string }> | null;
+  doctor_profile: Record<string, unknown> | null;
   is_active: boolean;
+  is_default: boolean;
+  onboarding_status: OnboardingStatus;
+  onboarding_error: string | null;
   created_at: string;
   updated_at: string;
+}
+
+// ── Transcript ───────────────────────────────────────────────
+
+export interface TranscriptListItem {
+  id: string;
+  recording_id: string;
+  appointment_id: string | null;
+  patient_name: string | null;
+  appointment_scheduled_at: string | null;
+  provider: string;
+  duration_s: number | null;
+  snippet: string | null;
+  created_at: string;
+}
+
+export interface Transcript {
+  id: string;
+  recording_id: string;
+  appointment_id: string | null;
+  patient_name: string | null;
+  appointment_scheduled_at: string | null;
+  provider: string;
+  paragraphs_text: string | null;
+  utterances_text: string | null;
+  duration_s: number | null;
+  audio_url: string | null;
+  created_at: string;
+}
+
+// ── Template onboarding ──────────────────────────────────────
+
+export type OnboardingStep =
+  | 'upload'
+  | 'extract'
+  | 'architect'
+  | 'transform'
+  | 'finalize'
+  | 'done'
+  | 'error'
+  | 'connected';
+
+export interface OnboardingSnapshot {
+  step: OnboardingStep;
+  message: string;
+  progress: number;
 }

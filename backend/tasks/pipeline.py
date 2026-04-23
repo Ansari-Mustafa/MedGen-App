@@ -115,12 +115,21 @@ async def run_pipeline(ctx, *, recording_id: str, report_id: str, template_id: s
             finally:
                 os.unlink(tpl_tmp)
 
-            # Fill with Claude
-            filled_data = await fill_svc.fill_placeholders(placeholders, result["paragraphs_text"])
+            # Fill with Claude. Response shape: {filled: {...}, unfilled: [...]}
+            fill_response = await fill_svc.fill_placeholders(placeholders, result["paragraphs_text"])
+            if isinstance(fill_response, dict) and "filled" in fill_response:
+                filled_data = fill_response.get("filled") or {}
+                unfilled_data = fill_response.get("unfilled") or []
+            else:
+                # Defensive: if a future fill service returns the flat map directly.
+                filled_data = fill_response or {}
+                unfilled_data = []
 
-            # Update report with filled JSON
+            # Update report with the flat placeholder→value map.
             report = await db.get(Report, uuid.UUID(report_id))
             report.filled_json = filled_data
+            if unfilled_data:
+                report.edits_json = {"__unfilled__": unfilled_data}
             await db.commit()
             await _update_job(db, report_id, "fill", "done")
             await publish("fill", "done")

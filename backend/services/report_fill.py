@@ -33,6 +33,7 @@ LANGUAGE & STYLE RULES — follow these strictly:
 - Use precise, professional medical-legal language appropriate for a UK medicolegal report.
 - Write in the third person. Do NOT use the claimant's name anywhere in descriptive or narrative fields. Refer to them only as "the claimant" (e.g. "The claimant reports...", "The claimant attended..."). The only exception is identity fields such as patient_name, patient_dob, patient_address — those should contain the actual value from the transcript.
 - Do not use informal language, contractions, or colloquialisms.
+- ALWAYS format dates as DD/MM/YYYY (e.g. "05/04/2026", not "5th April 2026", "April 5, 2026", "2026-04-05", or any other variant). This applies to every date field and every date mentioned inside narrative text, including dates of birth, dates of accident, dates of examination, and any other date references.
 
 EXTRACTION RULES:
 1. Read the transcript carefully.
@@ -74,10 +75,10 @@ def _extract_json(text: str) -> dict:
     text = text.strip()
     if not text.startswith("{"):
         start = text.find("{")
-        end = text.rfind("}") + 1
-        if start != -1 and end > start:
-            text = text[start:end]
-    return json.loads(text)
+        if start != -1:
+            text = text[start:]
+    obj, _ = json.JSONDecoder().raw_decode(text)
+    return obj
 
 
 async def fill_placeholders(placeholders: list[str], transcript: str) -> dict:

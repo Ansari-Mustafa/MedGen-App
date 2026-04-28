@@ -1,5 +1,6 @@
 import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
+import { Showcase } from "@/components/showcase";
 import { Problem } from "@/components/problem";
 import { Pipeline } from "@/components/pipeline";
 import { Features } from "@/components/features";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <Nav />
       <main>
         <Hero />
+        <Showcase />
         <Problem />
         <Pipeline />
         <Features />

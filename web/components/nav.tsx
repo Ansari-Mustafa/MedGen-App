@@ -9,6 +9,7 @@ import { cn } from "@/lib/cn";
 import { Menu, X } from "lucide-react";
 
 const links = [
+  { href: "#demo", label: "Demo" },
   { href: "#how-it-works", label: "How it works" },
   { href: "#features", label: "Features" },
   { href: "#platforms", label: "Platforms" },

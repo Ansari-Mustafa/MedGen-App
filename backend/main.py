@@ -5,7 +5,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.config import get_settings
-from backend.routers import patients, appointments, notifications, reports, recordings, stream, templates, transcripts, ws, me, dashboard
+from backend.routers import patients, appointments, notifications, reports, recordings, stream, templates, transcripts, ws, me, dashboard, early_access
 
 settings = get_settings()
 
@@ -56,6 +56,7 @@ app.include_router(transcripts.router)
 app.include_router(ws.router)
 app.include_router(me.router)
 app.include_router(dashboard.router)
+app.include_router(early_access.router)
 
 
 @app.get("/health")

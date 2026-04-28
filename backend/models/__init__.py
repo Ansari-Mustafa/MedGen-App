@@ -11,6 +11,7 @@ from backend.models.report import Report
 from backend.models.processing_job import ProcessingJob
 from backend.models.notification import Notification
 from backend.models.credit import CreditAccount, CreditTransaction
+from backend.models.early_access import EarlyAccessSignup
 
 __all__ = [
     "Profile", "Clinic", "AuditLog",
@@ -19,4 +20,5 @@ __all__ = [
     "Recording", "Transcript", "Report", "ProcessingJob",
     "Notification",
     "CreditAccount", "CreditTransaction",
+    "EarlyAccessSignup",
 ]

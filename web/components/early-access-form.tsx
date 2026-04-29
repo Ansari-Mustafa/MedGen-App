@@ -49,7 +49,7 @@ export function EarlyAccessForm() {
         return;
       }
 
-      // Treat duplicates as success — friendlier UX
+      // Treat duplicates as success, friendlier UX
       if (res.status === 409) {
         setState({ kind: "success" });
         return;
@@ -173,7 +173,7 @@ export function EarlyAccessForm() {
                         name="practice"
                         type="text"
                         autoComplete="organization"
-                        placeholder="Smith Medico-Legal Associates"
+                        placeholder="Greenwood Clinic"
                         disabled={submitting}
                       />
                     </Field>
@@ -190,13 +190,13 @@ export function EarlyAccessForm() {
                           <option value="" disabled>
                             Select a role
                           </option>
+                          <option value="clinician">Doctor / clinician</option>
                           <option value="medical_legal_expert">
                             Medical-legal expert
                           </option>
-                          <option value="instructing_solicitor">
-                            Instructing solicitor
+                          <option value="agency">
+                            Reporting agency / solicitor
                           </option>
-                          <option value="agency">Reporting agency</option>
                           <option value="other">Other</option>
                         </Select>
                       </Field>

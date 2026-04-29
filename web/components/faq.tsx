@@ -10,23 +10,27 @@ import { Reveal } from "@/components/motion/reveal";
 const items = [
   {
     q: "Will my report formatting actually survive?",
-    a: "Yes. Your .docx file stays a .docx file end-to-end — we never convert it to PDF, HTML, or anything else mid-pipeline. Margins, headers, footers, table styles, signature blocks, and even custom fonts come through untouched. The AI only fills placeholder fields; the document structure is yours.",
+    a: "Yes. Your Word file stays a Word file end-to-end. We never convert it to PDF, HTML, or anything else mid-process. Margins, headers, footers, table styles, signature blocks, and custom fonts come through untouched. The system only fills the parts you've marked as variable; the document structure is yours.",
   },
   {
-    q: "What stops the AI from hallucinating clinical content?",
-    a: "Two layers. First, the AI is constrained to producing JSON that matches your Pydantic schema — it cannot write free text into the document. Second, every output passes through validation before render: missing fields, wrong types, or fabricated structure get caught and rejected. And then a doctor still reviews every report before it leaves the system.",
+    q: "Can I trust what the AI writes?",
+    a: "The system only drafts from what your transcript actually contains. It doesn't fill space with invented detail. If a section's source is missing or unclear, you get a flag asking you to confirm rather than a fabrication. And every report passes through your review before it leaves the system. Doctor sign-off is non-negotiable.",
+  },
+  {
+    q: "Is this only for medical-legal reports?",
+    a: "No. The system works with any clinical report type: IME / medico-legal, psychiatric assessments, chronic-pain reviews, occupational health, and general clinic letters. It's driven by the template and past reports you upload, so the same engine adapts to whatever format you write in.",
   },
   {
     q: "Where is my data stored?",
-    a: "Your audio, transcripts, and reports live in a region-locked Postgres database (EU/UK by default). Audio is encrypted at rest. Row-level security ensures one doctor cannot see another doctor's data. Audit logs record every read and write. We never train models on your data.",
+    a: "Your audio, transcripts, and reports live in a region-locked database (EU/UK by default). Audio is encrypted at rest. Strict access controls ensure one doctor cannot see another's data. Audit logs record every read and write. We never train models on your data.",
   },
   {
     q: "What does onboarding involve?",
-    a: "You upload two or three of your past reports as .docx. Our system analyses them to learn your structure, recurring phrases, and terminology preferences, then builds a Jinja2-based template you can review. You see exactly what your generated reports will look like before approving the template. Total time: usually under an hour of your involvement.",
+    a: "You upload two or three of your past reports. The system reads them to learn your structure, recurring phrases, and terminology preferences, then builds a template you can review. You see exactly what your generated reports will look like before approving anything. Total time: usually under an hour of your involvement.",
   },
   {
     q: "What happens to my voice and audio files?",
-    a: "Audio is stored only as long as you need it for review. You can delete any session's audio and transcript at any time. We do not use audio for training. Speaker diarization runs server-side and the raw audio never leaves our infrastructure.",
+    a: "Audio is stored only as long as you need it for review. You can delete any session's audio and transcript at any time. We do not use audio to train models. The raw audio never leaves our infrastructure.",
   },
   {
     q: "Pricing?",

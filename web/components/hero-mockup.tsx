@@ -4,13 +4,13 @@ import { motion, useReducedMotion } from "motion/react";
 import { Mic, ArrowDown } from "lucide-react";
 
 /**
- * Hero mockup — communicates the product transformation in two halves:
+ * Hero mockup. Communicates the product transformation in two halves:
  *
  *   1) Live audio capture strip (continuously-animating waveform + transcript line)
  *   2) Microsoft Word document page (paper-styled, serif, with letterhead, justified
  *      paragraphs, bullet list and page-number footer) showing the report being filled in.
  *
- * The Word page deliberately stays white in both light and dark modes — paper is
+ * The Word page deliberately stays white in both light and dark modes. Paper is
  * paper. The surrounding chrome adapts to the theme.
  */
 export function HeroMockup() {
@@ -140,7 +140,7 @@ function LiveWaveform() {
 }
 
 /* ----------------------------------------------------------------- */
-/* Flow connector — shows audio → document                            */
+/* Flow connector: shows audio to document                            */
 /* ----------------------------------------------------------------- */
 
 function FlowConnector() {
@@ -201,7 +201,7 @@ function WordDocument({ baseDelay }: { baseDelay: number }) {
           <WordIcon />
           <div className="text-[11px]" style={{ color: "#444" }}>
             <span className="font-medium">report-2024-1847.docx</span>
-            <span style={{ color: "#888" }}> — Word</span>
+            <span style={{ color: "#888" }}> · Word</span>
           </div>
           <div className="ml-auto flex items-center gap-1 text-[10px]" style={{ color: "#666" }}>
             <span
@@ -225,7 +225,7 @@ function WordDocument({ baseDelay }: { baseDelay: number }) {
           </div>
         </div>
 
-        {/* Page body — paper */}
+        {/* Page body, paper */}
         <div
           className="px-7 sm:px-10 py-7 sm:py-8 space-y-4"
           style={{
@@ -264,7 +264,7 @@ function WordDocument({ baseDelay }: { baseDelay: number }) {
             INDEPENDENT MEDICAL REPORT
           </motion.h2>
 
-          {/* Demographics — two-column key/value rows */}
+          {/* Demographics: two-column key/value rows */}
           <div className="grid grid-cols-2 gap-x-8 gap-y-1.5 text-[12px] pt-1">
             <DocField label="Patient" value="Jane Doe" delay={baseDelay + 0.25} />
             <DocField label="DOB" value="14 March 1987" delay={baseDelay + 0.35} />
@@ -329,7 +329,7 @@ function WordDocument({ baseDelay }: { baseDelay: number }) {
           className="px-7 sm:px-10 py-2 border-t flex items-center justify-between text-[10px]"
           style={{ background: "#fafafa", borderColor: "#eaeaea", color: "#888", fontFamily: "var(--font-sans)" }}
         >
-          <span>Khan, M. — IMR — Doe, J.</span>
+          <span>Khan, M. · IMR · Doe, J.</span>
           <span>Page 1 of 4</span>
         </div>
       </div>
@@ -342,7 +342,7 @@ function WordDocument({ baseDelay }: { baseDelay: number }) {
 /* ----------------------------------------------------------------- */
 
 function WordIcon() {
-  // A tasteful blue rounded square with a stylized "W" — communicates
+  // A tasteful blue rounded square with a stylized "W". Communicates
   // "Word document" without being a literal copy of Microsoft's logo.
   return (
     <span

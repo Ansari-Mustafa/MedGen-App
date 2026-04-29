@@ -8,17 +8,17 @@ const stats = [
   {
     figure: "8 hrs",
     suffix: "/ week",
-    body: "Average time medical-legal experts spend writing reports — time stolen from clinical work and family.",
+    body: "Average time doctors spend writing reports. Time stolen from clinical work and family.",
   },
   {
     figure: "100%",
     suffix: "format risk",
-    body: "Generic dictation tools strip the formatting that took years to refine. One stray paragraph break ruins a court-ready document.",
+    body: "Generic dictation tools strip the formatting that took years to refine. One stray paragraph break ruins a finished document.",
   },
   {
     figure: "0%",
     suffix: "tolerance",
-    body: "Off-the-shelf AI hallucinates clinical detail. In medical-legal work, an invented fact is a liability, not a quirk.",
+    body: "Off-the-shelf AI invents clinical detail to fill space. In a clinical report, an invented fact is a liability, not a quirk.",
   },
 ];
 

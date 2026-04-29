@@ -12,25 +12,25 @@ const steps = [
     n: "01",
     icon: Mic,
     title: "Record",
-    body: "Phone, web, or upload. Live or post-session. Audio is stored before any processing — nothing gets lost on a flaky connection.",
+    body: "Phone, web, or upload. Live or post-session. Your audio is captured before anything else happens, so nothing gets lost on a flaky connection.",
   },
   {
     n: "02",
     icon: Waves,
     title: "Transcribe",
-    body: "Medical-grade STT with speaker diarization. Doctor and patient are separated. Clinical vocabulary, drug names, and timestamps preserved.",
+    body: "Your conversation is turned into a clean, speaker-labeled transcript. Clinical vocabulary, drug names and timing are preserved as said.",
   },
   {
     n: "03",
     icon: Sparkles,
     title: "Generate",
-    body: "Claude produces structured JSON validated against your Pydantic schema. Every field is checked before render. Hallucinations get caught.",
+    body: "We draft the report from what was actually said, written in your voice and laid out into your template. Errors get caught before you see them.",
   },
   {
     n: "04",
     icon: FileCheck,
-    title: "Render & Review",
-    body: "Your .docx template renders untouched — every margin, font, and table style intact. You review, edit, sign.",
+    title: "Review",
+    body: "Your template renders untouched. Every margin, font and table style intact. You read, edit, and sign.",
   },
 ];
 
@@ -44,13 +44,12 @@ export function Pipeline() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-4 text-[36px] sm:text-[44px] leading-[1.05] tracking-[-0.025em] font-semibold text-text text-balance">
-              Audio in. Court-ready report out.
+              Audio in. Finished report out.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-4 text-[16.5px] leading-relaxed text-text-muted text-pretty">
-              Four steps. The AI never touches your document. It produces
-              structured data; your template handles formatting.
+              Four steps. Your formatting stays untouched. You stay in control.
             </p>
           </Reveal>
         </div>

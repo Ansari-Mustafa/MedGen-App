@@ -44,7 +44,7 @@ export function Platforms() {
             </h3>
             <p className="mt-2 text-[14.5px] leading-relaxed text-text-muted">
               Live recording in clinic, between sessions, in the car park.
-              Chunked uploads survive flaky connections — nothing gets lost.
+              Chunked uploads survive flaky connections. Nothing gets lost.
             </p>
 
             <div className="mt-8 flex justify-center">
@@ -77,7 +77,7 @@ export function Platforms() {
             </h3>
             <p className="mt-2 text-[14.5px] leading-relaxed text-text-muted max-w-md">
               Side-by-side transcript and report. Edit in-place or download the
-              .docx. Approve, sign, and send — all from one screen.
+              .docx. Approve, sign, and send, all from one screen.
             </p>
 
             <div className="mt-8">
@@ -144,7 +144,7 @@ function PhoneMockup() {
           </div>
           <div className="mt-1 flex items-center justify-center gap-1 text-[10.5px] text-text-muted">
             <span className="h-1.5 w-1.5 rounded-full bg-error dot-pulse" style={{ background: "#ef4444" }} />
-            Live · diarizing
+            Live · capturing
           </div>
 
           {/* Stop button */}
@@ -179,7 +179,7 @@ function DesktopMockup() {
         </div>
       </div>
 
-      {/* App body — split */}
+      {/* App body, split */}
       <div className="grid grid-cols-2 min-h-[260px]">
         {/* Transcript pane */}
         <div className="border-r border-border p-4 bg-surface-2/30">
@@ -190,7 +190,7 @@ function DesktopMockup() {
             <div>
               <span className="text-accent font-medium">Dr. Khan:</span>{" "}
               <span className="text-text-muted">
-                Tell me about the pain — when did it start?
+                Tell me about the pain. When did it start?
               </span>
             </div>
             <div>

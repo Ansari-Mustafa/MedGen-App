@@ -11,7 +11,7 @@ const features = [
   {
     icon: FileType2,
     title: "Your template, byte-for-byte",
-    body: "The .docx file you authored in Word is the file we render. No format reconstruction, no PDF round-trips, no broken tables. Margins, headers, footers, signature blocks — all preserved.",
+    body: "The Word file you authored is the file we render. No format reconstruction, no PDF round-trips, no broken tables. Margins, headers, footers, signature blocks, all preserved.",
     visual: <TemplateVisual />,
   },
   {
@@ -22,14 +22,14 @@ const features = [
   },
   {
     icon: ShieldCheck,
-    title: "Structured, not free text",
-    body: "Claude outputs JSON matching a Pydantic schema. Every field is validated before it touches your template. Missing data, wrong types, invented fields — caught before render.",
-    visual: <SchemaVisual />,
+    title: "Grounded in what was said",
+    body: "Reports are drafted only from what your transcript actually contains. Missing or unclear sections get flagged for you to fill in. Never invented to fill space.",
+    visual: <GroundedVisual />,
   },
   {
     icon: Repeat,
-    title: "A feedback loop that improves you",
-    body: "Every edit you make is a correction pair we store: AI output vs your final. Your profile retunes itself over time. The more reports you sign, the closer the first draft gets.",
+    title: "Gets better the more you use it",
+    body: "Every edit you make teaches the system how you'd have written it. Over time the first draft lands closer to your final. Less editing, faster turnaround.",
     visual: <FeedbackVisual />,
   },
 ];
@@ -44,7 +44,7 @@ export function Features() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-4 text-[36px] sm:text-[44px] leading-[1.05] tracking-[-0.025em] font-semibold text-text text-balance">
-              Built around the way medical-legal reports actually work.
+              Built around the way you actually write reports.
             </h2>
           </Reveal>
         </div>
@@ -86,25 +86,22 @@ export function Features() {
 
 function TemplateVisual() {
   return (
-    <div className="font-mono text-[11.5px] leading-[1.7] text-text-muted bg-surface-2 hairline rounded-md p-4 overflow-hidden">
-      <div className="flex justify-between items-center mb-2 text-[10px] uppercase tracking-wider text-text-subtle">
-        <span>template.docx</span>
+    <div className="text-[12px] leading-[1.8] text-text bg-surface-2 hairline rounded-md p-4 overflow-hidden" style={{ fontFamily: "'Times New Roman', Times, ui-serif, serif" }}>
+      <div className="flex justify-between items-center mb-2 text-[10px] uppercase tracking-wider text-text-subtle font-mono">
+        <span>your-template.docx</span>
         <span>preserved</span>
       </div>
       <div>
-        <span className="text-text-subtle">// Your Word file</span>
+        <span className="font-semibold">Patient Name:</span>{" "}
+        <span className="text-accent">Jane Doe</span>
       </div>
-      <div className="mt-1 text-text">
-        Patient Name: <span className="text-accent">{"{{ patient_name }}"}</span>
+      <div>
+        <span className="font-semibold">DOB:</span>{" "}
+        <span className="text-accent">14 March 1987</span>
       </div>
-      <div className="text-text">
-        DOB: <span className="text-accent">{"{{ patient_dob }}"}</span>
-      </div>
-      <div className="text-text-subtle">{"{%p for item in findings %}"}</div>
-      <div className="text-text pl-4">
-        • <span className="text-accent">{"{{ item }}"}</span>
-      </div>
-      <div className="text-text-subtle">{"{%p endfor %}"}</div>
+      <div className="mt-1 font-semibold">Findings:</div>
+      <div className="pl-3 text-text">• Tenderness on palpation, L4–L5</div>
+      <div className="pl-3 text-text">• Reduced lumbar flexion bilaterally</div>
     </div>
   );
 }
@@ -133,23 +130,32 @@ function VoiceVisual() {
   );
 }
 
-function SchemaVisual() {
+function GroundedVisual() {
   return (
-    <div className="font-mono text-[11.5px] leading-relaxed text-text-muted bg-surface-2 hairline rounded-md p-4">
-      <div className="text-text-subtle">// Validated before render</div>
-      <div className="mt-1">
-        <span className="text-text">presenting_complaint</span>
-        <span className="text-text-subtle">: str</span>
+    <div className="space-y-2 text-[13px] text-text">
+      <div className="flex items-start gap-2.5">
+        <span className="mt-[3px] text-success font-bold">✓</span>
+        <span>
+          <span className="font-medium">Onset of symptoms</span>{" "}
+          <span className="text-text-muted">· sourced from 02:14</span>
+        </span>
       </div>
-      <div>
-        <span className="text-text">findings</span>
-        <span className="text-text-subtle">: list[Finding]</span>
+      <div className="flex items-start gap-2.5">
+        <span className="mt-[3px] text-success font-bold">✓</span>
+        <span>
+          <span className="font-medium">Examination findings</span>{" "}
+          <span className="text-text-muted">· sourced from 11:42</span>
+        </span>
       </div>
-      <div>
-        <span className="text-text">recommendations</span>
-        <span className="text-text-subtle">: list[str]</span>
+      <div className="flex items-start gap-2.5">
+        <span className="mt-[3px] text-warning font-bold" style={{ color: "#d97706" }}>
+          !
+        </span>
+        <span>
+          <span className="font-medium">Date of last MRI</span>{" "}
+          <span className="text-text-muted">· not mentioned, please confirm</span>
+        </span>
       </div>
-      <div className="mt-2 text-success">✓ schema valid · 12 fields</div>
     </div>
   );
 }

@@ -39,9 +39,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-full hairline bg-surface px-3 py-1 text-[12px] font-medium"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-success dot-pulse" />
-              <span className="text-text-muted">
-                Invite-only · For medical-legal practitioners
-              </span>
+              <span className="text-text-muted">Invite-only</span>
             </motion.div>
 
             <motion.h1
@@ -72,9 +70,9 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.7 }}
               className="mt-6 text-[17px] sm:text-[18px] leading-relaxed text-text-muted text-pretty max-w-[34rem]"
             >
-              MedGen records your session, transcribes it, and produces a fully
-              formatted report in your template, in your style. The AI never
-              touches free text. <span className="text-text">You review and sign.</span>
+              Record your session. We transcribe it and write the report in
+              your template, in your style.{" "}
+              <span className="text-text">You review and sign.</span>
             </motion.p>
 
             <motion.div

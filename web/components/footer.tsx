@@ -9,8 +9,8 @@ export function Footer() {
           <div>
             <Wordmark />
             <p className="mt-4 text-[13.5px] text-text-muted max-w-sm leading-relaxed">
-              AI-assisted medical-legal report generation. Built for practitioners
-              who can't afford to compromise on formatting, voice, or accuracy.
+              AI-assisted clinical report writing. Built for doctors who can't
+              afford to compromise on formatting, voice, or accuracy.
             </p>
           </div>
 
@@ -96,7 +96,7 @@ export function Footer() {
         <div className="mt-12 hairline-t pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-[12px] text-text-subtle">
           <div>© {new Date().getFullYear()} MedGen. All rights reserved.</div>
           <div className="font-mono">
-            Built carefully · for medical-legal practitioners
+            Built carefully · for doctors
           </div>
         </div>
       </Container>

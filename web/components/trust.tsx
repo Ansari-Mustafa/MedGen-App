@@ -9,7 +9,7 @@ const pillars = [
   {
     icon: Lock,
     title: "Your data, your tenancy",
-    body: "Postgres with row-level security. Doctor-scoped audit logs on every mutation. Audio is encrypted at rest. We never train on your data.",
+    body: "Strict access controls and per-doctor audit logs on every change. Audio and transcripts are encrypted at rest. We never train models on your data.",
   },
   {
     icon: UserCheck,
@@ -19,7 +19,7 @@ const pillars = [
   {
     icon: Globe2,
     title: "EU/UK-aligned by default",
-    body: "Data stored in-region. Processing logs retained for compliance. Built around the principle that medico-legal evidence must be defensible end-to-end.",
+    body: "Data stored in-region. Processing logs retained for compliance. Built so that whatever the report is for, it's defensible end-to-end.",
   },
 ];
 
@@ -29,18 +29,18 @@ export function Trust() {
       <Container size="xl">
         <div className="max-w-2xl">
           <Reveal>
-            <SectionEyebrow>Built for the bar</SectionEyebrow>
+            <SectionEyebrow>Security & trust</SectionEyebrow>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-4 text-[36px] sm:text-[44px] leading-[1.05] tracking-[-0.025em] font-semibold text-text text-balance">
-              Trustworthy at the level a courtroom expects.
+              Built to the standard your work demands.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-4 text-[16.5px] leading-relaxed text-text-muted text-pretty">
-              Medico-legal reports are evidence. We treat them that way — with
-              audit trails, human approval, and data handling that meets your
-              regulator's bar.
+              Clinical reports are serious documents. We treat them that way,
+              with audit trails, human approval on every output, and data
+              handling that meets your regulator's bar.
             </p>
           </Reveal>
         </div>

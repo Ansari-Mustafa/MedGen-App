@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------- */
-/* Theme tokens — light first, dark via prefers-color-scheme        */
+/* Theme tokens. Light first, dark via prefers-color-scheme         */
 /* No manual toggle. Theme follows the user's OS setting.            */
 /* ---------------------------------------------------------------- */
 

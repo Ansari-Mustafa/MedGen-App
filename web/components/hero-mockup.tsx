@@ -106,7 +106,7 @@ function LiveWaveform() {
   if (reduced) {
     // Static, accessible fallback
     return (
-      <div className="flex items-center gap-[2px] h-9" aria-hidden>
+      <div className="flex items-center justify-center gap-[2px] h-9" aria-hidden>
         {tracks.map((t, i) => (
           <span
             key={i}
@@ -119,7 +119,7 @@ function LiveWaveform() {
   }
 
   return (
-    <div className="flex items-center gap-[2px] h-9" aria-hidden>
+    <div className="flex items-center justify-center gap-[2px] h-9" aria-hidden>
       {tracks.map((track, i) => (
         <motion.span
           key={i}

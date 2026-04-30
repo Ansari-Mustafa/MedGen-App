@@ -94,10 +94,19 @@ export function Footer() {
         </div>
 
         <div className="mt-12 hairline-t pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-[12px] text-text-subtle">
-          <div>© {new Date().getFullYear()} MedGen. All rights reserved.</div>
-          <div className="font-mono">
-            Built carefully · for doctors
+          <div>
+            © {new Date().getFullYear()}{" "}
+            <a
+              href="https://lv4ai.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-text-muted hover:text-text transition-colors underline-offset-2 hover:underline"
+            >
+              Love-For-AI
+            </a>
+            . All rights reserved.
           </div>
+          <div className="font-mono">Built carefully · for doctors</div>
         </div>
       </Container>
     </footer>

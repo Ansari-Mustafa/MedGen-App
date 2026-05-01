@@ -49,19 +49,19 @@ export function HeroMockup() {
 
 function AudioStrip() {
   return (
-    <div className="rounded-xl bg-surface hairline shadow-clinical p-4 sm:p-5">
+    <div className="rounded-xl bg-surface hairline shadow-clinical p-4 sm:p-5 overflow-hidden">
       <div className="flex items-center gap-3">
         <div
-          className="flex h-9 w-9 items-center justify-center rounded-full"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
           style={{ background: "rgba(239, 68, 68, 0.1)", color: "#ef4444" }}
         >
           <Mic size={15} />
         </div>
-        <div className="min-w-0">
-          <div className="text-[13px] font-medium text-text">
+        <div className="min-w-0 flex-1">
+          <div className="text-[13px] font-medium text-text truncate">
             Live session · Ms. J. Doe
           </div>
-          <div className="text-[11px] text-text-muted">
+          <div className="text-[11px] text-text-muted truncate">
             Personal injury assessment
           </div>
         </div>
@@ -74,7 +74,7 @@ function AudioStrip() {
         </div>
       </div>
 
-      <div className="mt-3.5">
+      <div className="mt-3.5 overflow-hidden">
         <LiveWaveform />
       </div>
 
@@ -106,11 +106,11 @@ function LiveWaveform() {
   if (reduced) {
     // Static, accessible fallback
     return (
-      <div className="flex items-center justify-center gap-[2px] h-9" aria-hidden>
+      <div className="flex items-center justify-between h-9 w-full" aria-hidden>
         {tracks.map((t, i) => (
           <span
             key={i}
-            className="block w-[2px] rounded-full bg-accent"
+            className="block w-[2px] shrink-0 rounded-full bg-accent"
             style={{ height: `${Math.round(t[1] * 100)}%`, opacity: 0.7 }}
           />
         ))}
@@ -119,11 +119,11 @@ function LiveWaveform() {
   }
 
   return (
-    <div className="flex items-center justify-center gap-[2px] h-9" aria-hidden>
+    <div className="flex items-center justify-between h-9 w-full" aria-hidden>
       {tracks.map((track, i) => (
         <motion.span
           key={i}
-          className="block w-[2px] rounded-full bg-accent origin-center"
+          className="block w-[2px] shrink-0 rounded-full bg-accent origin-center"
           style={{ height: "100%" }}
           animate={{ scaleY: track }}
           transition={{
@@ -199,11 +199,11 @@ function WordDocument({ baseDelay }: { baseDelay: number }) {
           style={{ background: "#f3f3f3", borderColor: "#e0e0e0" }}
         >
           <WordIcon />
-          <div className="text-[11px]" style={{ color: "#444" }}>
+          <div className="text-[11px] min-w-0 flex-1 truncate" style={{ color: "#444" }}>
             <span className="font-medium">report-2024-1847.docx</span>
             <span style={{ color: "#888" }}> · Word</span>
           </div>
-          <div className="ml-auto flex items-center gap-1 text-[10px]" style={{ color: "#666" }}>
+          <div className="ml-auto flex items-center gap-1 text-[10px] shrink-0" style={{ color: "#666" }}>
             <span
               className="h-1.5 w-1.5 rounded-full"
               style={{ background: "#22c55e" }}
@@ -227,7 +227,7 @@ function WordDocument({ baseDelay }: { baseDelay: number }) {
 
         {/* Page body, paper */}
         <div
-          className="px-7 sm:px-10 py-7 sm:py-8 space-y-4"
+          className="px-5 sm:px-10 py-7 sm:py-8 space-y-4"
           style={{
             fontFamily:
               "'Times New Roman', Times, ui-serif, Georgia, serif",
@@ -265,7 +265,7 @@ function WordDocument({ baseDelay }: { baseDelay: number }) {
           </motion.h2>
 
           {/* Demographics: two-column key/value rows */}
-          <div className="grid grid-cols-2 gap-x-8 gap-y-1.5 text-[12px] pt-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1.5 text-[12px] pt-1">
             <DocField label="Patient" value="Jane Doe" delay={baseDelay + 0.25} />
             <DocField label="DOB" value="14 March 1987" delay={baseDelay + 0.35} />
             <DocField label="Date of Session" value="22 April 2026" delay={baseDelay + 0.45} />
@@ -326,11 +326,11 @@ function WordDocument({ baseDelay }: { baseDelay: number }) {
 
         {/* Page footer */}
         <div
-          className="px-7 sm:px-10 py-2 border-t flex items-center justify-between text-[10px]"
+          className="px-5 sm:px-10 py-2 border-t flex items-center justify-between gap-3 text-[10px]"
           style={{ background: "#fafafa", borderColor: "#eaeaea", color: "#888", fontFamily: "var(--font-sans)" }}
         >
-          <span>Khan, M. · IMR · Doe, J.</span>
-          <span>Page 1 of 4</span>
+          <span className="truncate">Khan, M. · IMR · Doe, J.</span>
+          <span className="shrink-0">Page 1 of 4</span>
         </div>
       </div>
     </div>

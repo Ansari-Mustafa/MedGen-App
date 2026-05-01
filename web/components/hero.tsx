@@ -31,7 +31,7 @@ export function Hero() {
       <Container size="xl">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left: copy */}
-          <div className="lg:col-span-6 max-w-xl">
+          <div className="lg:col-span-6 max-w-xl min-w-0">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -46,7 +46,7 @@ export function Hero() {
               initial="hidden"
               animate="visible"
               variants={stagger}
-              className="mt-6 text-[44px] sm:text-[56px] lg:text-[64px] leading-[1.02] tracking-[-0.03em] font-semibold text-text text-balance"
+              className="mt-6 text-[34px] sm:text-[56px] lg:text-[64px] leading-[1.05] sm:leading-[1.02] tracking-[-0.03em] font-semibold text-text"
             >
               {headline.map((word, i) => (
                 <motion.span
@@ -120,7 +120,7 @@ export function Hero() {
           </div>
 
           {/* Right: mockup */}
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-6 min-w-0">
             <HeroMockup />
           </div>
         </div>

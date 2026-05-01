@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Mic, Pencil, Phone, Monitor, Headphones } from "lucide-react";
+import { Pencil, Phone, Monitor, Headphones } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionEyebrow } from "@/components/ui/section-eyebrow";
 import { Reveal } from "@/components/motion/reveal";
@@ -52,8 +52,8 @@ export function Platforms() {
             </div>
 
             <div className="mt-6 flex flex-wrap gap-2">
-              <StoreBadge label="App Store" caption="iOS" />
-              <StoreBadge label="Google Play" caption="Android" />
+              <StoreBadge label="App Store" icon={<AppleIcon />} />
+              <StoreBadge label="Google Play" icon={<GooglePlayIcon />} />
             </div>
           </motion.div>
 
@@ -254,16 +254,59 @@ function DesktopMockup() {
   );
 }
 
-function StoreBadge({ label, caption }: { label: string; caption: string }) {
+function StoreBadge({
+  label,
+  icon,
+}: {
+  label: string;
+  icon: React.ReactNode;
+}) {
   return (
-    <div className="flex items-center gap-2 hairline rounded-md px-3 py-2 bg-bg">
-      <Mic size={14} className="text-text-muted" />
+    <div className="flex items-center gap-2.5 hairline rounded-md px-3 py-2 bg-bg">
+      <span className="shrink-0 text-text">{icon}</span>
       <div className="leading-tight">
         <div className="text-[9.5px] uppercase tracking-wider text-text-subtle font-mono">
-          Coming soon · {caption}
+          Coming soon
         </div>
         <div className="text-[12.5px] font-medium text-text">{label}</div>
       </div>
     </div>
+  );
+}
+
+function AppleIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={18}
+      height={18}
+      fill="currentColor"
+      aria-hidden
+    >
+      <path d="M16.365 1.43c0 1.14-.42 2.22-1.21 3.04-.84.87-2.21 1.55-3.32 1.46-.13-1.12.41-2.27 1.18-3.07.86-.9 2.32-1.55 3.35-1.43zM20.5 17.5c-.59 1.37-.87 1.98-1.63 3.19-1.06 1.69-2.55 3.79-4.4 3.81-1.65.02-2.07-1.07-4.3-1.06-2.23.01-2.7 1.08-4.34 1.06-1.85-.02-3.27-1.92-4.32-3.6-2.95-4.7-3.26-10.21-1.44-13.14 1.29-2.08 3.34-3.3 5.26-3.3 1.96 0 3.19 1.07 4.81 1.07 1.57 0 2.53-1.07 4.79-1.07 1.71 0 3.51.93 4.81 2.55-4.22 2.31-3.54 8.34.76 10.49z" />
+    </svg>
+  );
+}
+
+function GooglePlayIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={18} height={18} aria-hidden>
+      <path
+        d="M3.609 1.814 13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .61-.92z"
+        fill="#34a853"
+      />
+      <path
+        d="M16.81 8.819 6.05 2.566 14.54 11.06l2.27-2.241z"
+        fill="#ea4335"
+      />
+      <path
+        d="m20.16 10.81-2.91-1.69-2.5 2.88 2.5 2.88 2.92-1.69a1.43 1.43 0 0 0 0-2.38z"
+        fill="#fbbc04"
+      />
+      <path
+        d="M6.05 21.434 16.81 15.18l-2.27-2.241L6.05 21.434z"
+        fill="#4285f4"
+      />
+    </svg>
   );
 }

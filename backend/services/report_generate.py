@@ -63,19 +63,27 @@ def _transform_list_placeholders(root_elem) -> int:
     return len(to_transform)
 
 
-def _is_known_list(key: str, data: dict) -> bool:
-    return isinstance(data["filled"].get(key), list)
+def _normalise_fill_payload(data: dict) -> tuple[dict, list[dict]]:
+    """
+    Accept either the legacy wrapped shape `{filled: {...}, unfilled: [...]}`
+    or the flat placeholder→value map the pipeline now passes.
+    """
+    if isinstance(data, dict) and "filled" in data and isinstance(data["filled"], dict):
+        return data["filled"], data.get("unfilled") or []
+    return (data or {}), []
 
 
 def _build_context(data: dict, keep_unfilled: bool = True) -> dict:
-    unfilled_keys = {item["placeholder"] for item in data.get("unfilled", [])}
-    context = {}
-    for k, v in data["filled"].items():
+    filled, unfilled = _normalise_fill_payload(data)
+    unfilled_keys = {item["placeholder"] for item in unfilled if isinstance(item, dict) and "placeholder" in item}
+    context: dict = {}
+    for k, v in filled.items():
+        is_list = isinstance(v, list)
         if v is None:
             if keep_unfilled:
-                context[k] = ["{{ " + k + "[] }}"] if _is_known_list(k, data) else "{{" + k + "}}"
+                context[k] = ["{{ " + k + "[] }}"] if is_list else "{{" + k + "}}"
             else:
-                context[k] = [] if _is_known_list(k, data) else ""
+                context[k] = [] if is_list else ""
         else:
             context[k] = v
     for key in unfilled_keys:

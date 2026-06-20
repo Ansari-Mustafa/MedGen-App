@@ -28,9 +28,11 @@ class Settings(BaseSettings):
     # STT providers
     elevenlabs_api_key: str = ""
     deepgram_api_key: str = ""
+    google_api_key: str = ""
 
     # Provider selection (swappable)
     stt_provider: str = "elevenlabs"   # elevenlabs | deepgram | assemblyai
+    stt_fallback_to_gemini: bool = True
     ai_provider: str = "anthropic"     # anthropic | openai
     ai_model: str = "claude-opus-4-6"
 

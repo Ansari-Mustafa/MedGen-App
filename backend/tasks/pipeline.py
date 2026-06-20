@@ -82,10 +82,11 @@ async def run_pipeline(ctx, *, recording_id: str, report_id: str, template_id: s
                 filename=recording.storage_path.split("/")[-1],
             )
 
-            # Save transcript
+            # Save transcript (use the provider that actually succeeded —
+            # may differ from settings if Gemini fallback fired)
             transcript = Transcript(
                 recording_id=uuid.UUID(recording_id),
-                provider=settings.stt_provider,
+                provider=result.get("provider", settings.stt_provider),
                 raw_json=result["raw_json"],
                 paragraphs_text=result["paragraphs_text"],
                 utterances_text=result["utterances_text"],

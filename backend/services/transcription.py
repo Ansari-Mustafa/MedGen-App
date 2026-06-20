@@ -1,11 +1,20 @@
 """
-Transcription service — ElevenLabs Scribe V2 with speaker diarization.
-Logic ported from extras/scripts/transcribe.py.
+Transcription service.
+
+Primary: ElevenLabs Scribe V2 with speaker diarization (per-word timestamps).
+Fallback: Google Gemini 2.5 Pro (prompt-based diarization, no timestamps).
+
+The fallback fires automatically on any ElevenLabs error (quota, network, etc.)
+when settings.stt_fallback_to_gemini is True and GOOGLE_API_KEY is set.
 """
 import asyncio
-import tempfile
+import logging
 import os
+import re
+import tempfile
 from backend.config import get_settings
+
+logger = logging.getLogger("medgen.transcription")
 
 
 def _format_paragraphs(result: dict) -> str:
@@ -66,41 +75,124 @@ def _format_utterances(result: dict) -> str:
     return "\n\n".join(lines)
 
 
-async def transcribe_bytes(audio_bytes: bytes, filename: str = "audio.mp3", language: str = "en", num_speakers: int = 2) -> dict:
-    """
-    Transcribe raw audio bytes.
-    Returns {raw_json, paragraphs_text, utterances_text}.
-    """
+def _mime_for(filename: str) -> str:
+    ext = os.path.splitext(filename)[1].lower()
+    return {
+        ".mp3": "audio/mp3",
+        ".wav": "audio/wav",
+        ".m4a": "audio/mp4",
+        ".mp4": "audio/mp4",
+        ".webm": "audio/webm",
+        ".ogg": "audio/ogg",
+    }.get(ext, "audio/mpeg")
+
+
+def _transcribe_elevenlabs_sync(audio_bytes: bytes, filename: str, language: str, num_speakers: int) -> dict:
     settings = get_settings()
+    from elevenlabs import ElevenLabs
+    client = ElevenLabs(api_key=settings.elevenlabs_api_key)
 
-    def _run():
-        from elevenlabs import ElevenLabs
-        client = ElevenLabs(api_key=settings.elevenlabs_api_key)
+    suffix = os.path.splitext(filename)[1] or ".mp3"
+    with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp:
+        tmp.write(audio_bytes)
+        tmp_path = tmp.name
 
-        # Write to temp file — ElevenLabs SDK needs a file-like object with a name
-        suffix = os.path.splitext(filename)[1] or ".mp3"
-        with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp:
-            tmp.write(audio_bytes)
-            tmp_path = tmp.name
+    try:
+        with open(tmp_path, "rb") as f:
+            response = client.speech_to_text.convert(
+                file=f,
+                model_id="scribe_v2",
+                language_code=language,
+                diarize=True,
+                num_speakers=num_speakers,
+                tag_audio_events=True,
+                timestamps_granularity="word",
+            )
+        raw = response.model_dump()
+    finally:
+        os.unlink(tmp_path)
 
-        try:
-            with open(tmp_path, "rb") as f:
-                response = client.speech_to_text.convert(
-                    file=f,
-                    model_id="scribe_v2",
-                    language_code=language,
-                    diarize=True,
-                    num_speakers=num_speakers,
-                    tag_audio_events=True,
-                    timestamps_granularity="word",
-                )
-            return response.model_dump()
-        finally:
-            os.unlink(tmp_path)
-
-    raw = await asyncio.to_thread(_run)
     return {
         "raw_json": raw,
         "paragraphs_text": _format_paragraphs(raw),
         "utterances_text": _format_utterances(raw),
+        "provider": "elevenlabs",
     }
+
+
+def _transcribe_gemini_sync(audio_bytes: bytes, filename: str) -> dict:
+    """Google Gemini 2.5 Pro with prompt-based diarization. No per-word timestamps."""
+    settings = get_settings()
+    if not settings.google_api_key:
+        raise RuntimeError("GOOGLE_API_KEY is not set; cannot use Gemini fallback.")
+
+    from google import genai
+    from google.genai import types
+
+    client = genai.Client(api_key=settings.google_api_key)
+
+    response = client.models.generate_content(
+        model="gemini-2.5-pro",
+        contents=[
+            types.Part.from_bytes(data=audio_bytes, mime_type=_mime_for(filename)),
+            "Transcribe this audio verbatim with speaker diarization. "
+            "Label speakers as Speaker 0, Speaker 1, etc. Format each turn as:\n"
+            "Speaker X: <text>\n\n"
+            "Separate each speaker turn with a blank line. "
+            "Preserve all medical terminology exactly as spoken. "
+            "Do not summarise — transcribe every word.",
+        ],
+    )
+
+    text = (response.text or "").strip()
+    if not text:
+        raise RuntimeError("Gemini returned an empty transcript.")
+
+    speakers = set(re.findall(r"Speaker (\d+)", text))
+    raw = {
+        "text": text,
+        "speakers": sorted(speakers),
+        "model": "gemini-2.5-pro",
+    }
+    return {
+        "raw_json": raw,
+        "paragraphs_text": text,
+        "utterances_text": text,
+        "provider": "gemini",
+    }
+
+
+async def transcribe_bytes(
+    audio_bytes: bytes,
+    filename: str = "audio.mp3",
+    language: str = "en",
+    num_speakers: int = 2,
+) -> dict:
+    """
+    Transcribe raw audio bytes.
+    Returns {raw_json, paragraphs_text, utterances_text, provider}.
+
+    Tries ElevenLabs first; on any error, falls back to Gemini if
+    settings.stt_fallback_to_gemini is True and GOOGLE_API_KEY is set.
+    """
+    settings = get_settings()
+
+    try:
+        return await asyncio.to_thread(
+            _transcribe_elevenlabs_sync, audio_bytes, filename, language, num_speakers
+        )
+    except Exception as primary_err:
+        if not settings.stt_fallback_to_gemini or not settings.google_api_key:
+            raise
+        logger.warning(
+            "ElevenLabs transcription failed (%s); falling back to Gemini.",
+            primary_err,
+        )
+        try:
+            return await asyncio.to_thread(_transcribe_gemini_sync, audio_bytes, filename)
+        except Exception as fallback_err:
+            logger.error("Gemini fallback also failed: %s", fallback_err)
+            raise RuntimeError(
+                f"Transcription failed. Primary (ElevenLabs): {primary_err}. "
+                f"Fallback (Gemini): {fallback_err}"
+            ) from fallback_err
